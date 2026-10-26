@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>胡志明市 5天4夜 孝親自由行手冊 (中華航空真實行情版)</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;       /* 華航企業藍 */
+      --primary-light: #eff6ff;
+      --primary-dark: #172554;
+      --secondary: #e11d48;     /* 華航紅梅粉蝶 */
+      --accent: #c2410c;
+      --transit-bg: #f8fafc;
+      --transit-border: #cbd5e1;
+      --must-bg: #fff7ed;
+      --must-border: #ea580c;
+      --calc-bg: #f0fdf4;
+      --calc-border: #16a34a;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --card-bg: #ffffff;
+      --shadow: 0 2px 4px rgba(0,0,0,0.05), 0 4px 6px rgba(0,0,0,0.08);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--gray-50);
+      color: var(--gray-800);
+      line-height: 1.6;
+      padding-bottom: 90px;
+    }
+    header {
+      background: linear-gradient(135deg, #172554, #1e3a8a);
+      color: #fdfcf7;
+      padding: 24px 16px 18px;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: var(--shadow);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      padding: 3px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+    header p {
+      font-size: 0.85rem;
+      opacity: 0.95;
+      color: #dbeafe;
+    }
+    .flight-pill {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-top: 12px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .flight-pill strong {
+      color: #fef08a;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 14px;
+    }
+
+    /* 匯率計算機卡片樣式 */
+    .converter-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--calc-border);
+      margin: 12px 0 14px;
+    }
+    .converter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .converter-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rate-status {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .status-live {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+    .status-fallback {
+      background: #fef3c7;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .current-rate-display {
+      font-size: 0.78rem;
+      color: #475569;
+      background: var(--calc-bg);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .current-rate-display strong {
+      color: #15803d;
+      font-size: 0.86rem;
+    }
+    .btn-refresh-rate {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 0.7rem;
+      cursor: pointer;
+      color: #334155;
+    }
+    .calc-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .calc-field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .calc-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .calc-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .calc-input {
+      width: 100%;
+      padding: 8px 36px 8px 10px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      outline: none;
+      background: #fafafa;
+    }
+    .calc-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+    .calc-unit {
+      position: absolute;
+      right: 10px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    .quick-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+    .quick-btn {
+      background: var(--calc-bg);
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .calc-hint {
+      font-size: 0.72rem;
+      color: #64748b;
+      margin-top: 6px;
+    }
+
+    /* 右下角懸浮按鈕 */
+    .float-calc-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 18px;
+      background: linear-gradient(135deg, #1e3a8a, #15803d);
+      color: white;
+      border: none;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10000;
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+    .float-calc-btn span {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* 頂部固定導航列 */
+    .nav-sticky-box {
+      position: sticky;
+      top: 0;
+      background-color: #ffffff;
+      padding: 10px 4px 8px;
+      z-index: 9999;
+      border-bottom: 2px solid var(--gray-200);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .nav-bar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .arrow-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .nav-scroll-track {
+      display: flex;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+      gap: 6px;
+      padding: 2px 4px;
+      flex-grow: 1;
+      scrollbar-width: thin;
+    }
+    .nav-tab-btn {
+      flex: 0 0 auto;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-tab-btn.active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 2px 6px rgba(30, 58, 138, 0.35);
+    }
+
+    /* 內容面板 */
+    .day-panel {
+      display: none;
+    }
+    .day-panel.active {
+      display: block !important;
+    }
+
+    .day-header {
+      background: var(--card-bg);
+      border-left: 5px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 12px 0 16px;
+      box-shadow: var(--shadow);
+    }
+    .day-header h2 {
+      font-size: 1.12rem;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .day-header .day-meta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* 時間軸結構 */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 20px;
+      width: 2px;
+      background: var(--gray-200);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-100);
+    }
+    .timeline-time {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .business-hours {
+      font-size: 0.76rem;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    /* 必吃 / 必買特色框 */
+    .must-try-box {
+      background-color: var(--must-bg);
+      border: 1px dashed var(--must-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 10px;
+      font-size: 0.8rem;
+      color: #9a3412;
+      line-height: 1.5;
+    }
+    .must-try-title {
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 3px;
+      color: #c2410c;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+    }
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .tag-food { background: #fee2e2; color: #991b1b; }
+    .tag-view { background: #e0e7ff; color: #3730a3; }
+    .tag-shop { background: #fef3c7; color: #92400e; }
+    .tag-senior { background: #dcfce7; color: #166534; }
+    .tag-spa { background: #fae8ff; color: #86198f; }
+
+    /* 按鈕樣式 */
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .btn-klook {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffedd5;
+      color: #ea580c;
+      border: 1.5px solid #fdba74;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(234, 88, 12, 0.15);
+    }
+
+    /* 交通耗時卡片 */
+    .transit-card {
+      margin: 8px 0 8px 6px;
+      padding: 8px 12px;
+      background: var(--transit-bg);
+      border-left: 4px solid var(--transit-border);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .transit-time {
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    /* 費用卡片 */
+    .summary-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      margin-top: 14px;
+      border: 1px solid var(--gray-200);
+    }
+    .summary-card h3 {
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      color: var(--gray-800);
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      padding: 5px 0;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+    .summary-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+      color: var(--primary-dark);
+      padding-top: 6px;
+    }
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    th {
+      background-color: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+    .tip-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.85rem;
+      color: #78350f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 懸浮匯率換算鈕 -->
+  <button class="float-calc-btn" onclick="toggleConverterFocus()" title="即時匯率換算">
+    <span>💱</span>
+    換算
+  </button>
+
+  <header>
+    <span class="badge">👨‍👩‍👧‍👦 8位大人 (含4位長者) ‧ 中華航空真實行情版</span>
+    <h1>胡志明市 5天4夜 孝親自由行手冊</h1>
+    <p>每天 08:00 啟程 ‧ 全店家指名招牌 ‧ 2次洗頭足浴 ‧ 81夜景 ‧ 遊船晚餐</p>
+    <div class="flight-pill">
+      <div>✈️ <strong>去程 (1/21)：中華航空 CI781</strong> 07:30 TPE ➔ 10:00 SGN (10:00落地！專車直達飯店寄行李)</div>
+      <div>✈️ <strong>回程 (1/25)：中華航空 CI784</strong> 17:15 SGN ➔ 21:40 TPE (玩到 14:15 專車送機)</div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- 即時匯率換算器小工具 -->
+    <div class="converter-card" id="currencyCard">
+      <div class="converter-header">
+        <div class="converter-title">
+          <span>💱 台幣 ⇄ 越南盾 即時換算</span>
+        </div>
+        <div id="rateStatus" class="rate-status status-live">
+          <span id="statusDot">🟢</span> <span id="statusText">載入即時匯率中...</span>
+        </div>
+      </div>
+      
+      <div class="current-rate-display">
+        <span>連線即時匯率：1 NTD ≈ <strong id="rateDisplay">800</strong> VND</span>
+        <button class="btn-refresh-rate" onclick="fetchLiveExchangeRate(true)">🔄 重新整理</button>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label class="calc-label">越南盾 (VND)：</label>
+          <div class="calc-input-wrapper">
+            <input type="number" id="inputVND" class="calc-input" placeholder="例如: 150000" oninput="calcVNDtoNTD()">
+            <span class="calc-unit">₫</span>
+          </div>
+        </div>
+        <div style="font-weight: 800; color: #94a3b8; font-size: 1.1rem; padding-top: 18px;">⇄</div>
+        <div class="calc-field">
+          <label class="calc-label">折合新台幣 (NTD)：</label>
+          <div class="calc-input-wrapper">
+            <input type="number" id="inputNTD" class="calc-input" placeholder="例如: 200" oninput="calcNTDtoVND()">
+            <span class="calc-unit">NT$</span>
+          </div>
+        </div>
+      </div>
+      <div class="quick-tags">
+        <span style="font-size:0.72rem; color:#64748b; align-self:center;">菜單K快捷：</span>
+        <button class="quick-btn" onclick="quickAddVND(30000)">30k (河粉)</button>
+        <button class="quick-btn" onclick="quickAddVND(60000)">60k (咖啡)</button>
+        <button class="quick-btn" onclick="quickAddVND(100000)">100k</button>
+        <button class="quick-btn" onclick="quickAddVND(300000)">300k (腰果)</button>
+        <button class="quick-btn" onclick="quickAddVND(500000)">500k (大鈔)</button>
+        <button class="quick-btn" style="background:#fee2e2; border-color:#fca5a5; color:#b91c1c;" onclick="clearCalc()">清空</button>
+      </div>
+      <div class="calc-hint">💡 <strong>長輩速算法</strong>：越盾去掉三個 0，再除以 8 (或乘以 1.25)，就是大約台幣金額！</div>
+    </div>
+
+    <!-- 頂部滑動導航列：附帶左右快捷切換箭頭 -->
+    <div class="nav-sticky-box">
+      <div class="nav-scroll-hint">
+        <span>👈 橫向滑動天數標籤</span>
+        <span>也可按左右箭頭切換 👉</span>
+      </div>
+      <div class="nav-bar-wrapper">
+        <button type="button" class="arrow-btn" onclick="prevDay()">◀</button>
+        <div class="nav-scroll-track" id="navTrack">
+          <button type="button" class="nav-tab-btn active" id="btn-day1" onclick="switchDay('day1')">Day 1 (1/21)</button>
+          <button type="button" class="nav-tab-btn" id="btn-day2" onclick="switchDay('day2')">Day 2 (1/22)</button>
+          <button type="button" class="nav-tab-btn" id="btn-day3" onclick="switchDay('day3')">Day 3 (1/23)</button>
+          <button type="button" class="nav-tab-btn" id="btn-day4" onclick="switchDay('day4')">Day 4 (1/24)</button>
+          <button type="button" class="nav-tab-btn" id="btn-day5" onclick="switchDay('day5')">Day 5 (1/25)</button>
+          <button type="button" class="nav-tab-btn" id="btn-budget" onclick="switchDay('budget')">💰 預算總覽</button>
+        </div>
+        <button type="button" class="arrow-btn" onclick="nextDay()">▶</button>
+      </div>
+    </div>
+
+    <!-- DAY 1 -->
+    <div id="day1" class="day-panel active">
+      <div class="day-header">
+        <h2>Day 1：華航抵達西貢 ‧ 飯店寄放行李 ‧ 錦麗河粉 ‧ 統一宮與郵局3小時 ‧ Vincom</h2>
+        <div class="day-meta">10:00 抵達 ｜ 先到飯店卸下大件行李 ｜ 輕裝前往名店享用第一餐</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">10:00 - 11:15</span>
+            <div class="timeline-title">中華航空 CI781 抵達新山一機場 ‧ 16人座專車接機</div>
+            <div class="business-hours">營業：24小時全年無休</div>
+            <div class="tag-container"><span class="tag tag-senior">華航早班抵達</span></div>
+            <div class="timeline-desc">中華航空 CI781 於上午 10:00 落地！提領行李出關後專屬司機舉牌接機，8 人行李直接搬上專車直奔第一區飯店。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tan+Son+Nhat+International+Airport" target="_blank" class="btn-map">📍 機場地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚐【專車接送】：機場 ➔ 第一區飯店 (Adora / Cochin)</span>
+          <span class="transit-time">專車約 30~35 分鐘 (約 7.5 公里)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">11:50 - 12:20</span>
+            <div class="timeline-title">飯店寄放 8 件大行李 ‧ 長輩稍微梳洗整裝</div>
+            <div class="business-hours">櫃檯服務：24小時全年無休 (行李免費安全保管)</div>
+            <div class="tag-container"><span class="tag tag-senior">免費寄放行李</span></div>
+            <div class="timeline-desc">直達 Adora Art 或 Cochin Sang Hotel。櫃檯提供免費且安全的行李寄存服務，換取行李卡，長輩至洗手間洗臉整裝，無行李負擔出發！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Adora+Art+Hotel+Ho+Chi+Minh" target="_blank" class="btn-map">📍 飯店地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：飯店 ➔ 錦麗河粉第3區店</span>
+          <span class="transit-time">車程約 10~12 分鐘 (約 2.8 公里，車費共約 NT$ 120)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">12:35 - 13:45</span>
+            <div class="timeline-title">全越第一河粉名店：錦麗河粉 (Phở Lệ)</div>
+            <div class="business-hours">營業：06:00 - 01:00 無公休日</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🍜 必吃指名推薦：</div>
+              • <strong>招牌生牛肉丸河粉 (Phở Tái Bò Viên)</strong>：生牛肉片淋上滾燙高湯燙至粉嫩，搭配 Q 彈手工牛丸。<br>
+              • <strong>香脆現炸油條 (Quẩy)</strong>：泡入大骨甘醇湯汁吸滿湯底精華。<br>
+              • <strong>越式冰滴煉乳咖啡 (Cà Phê Sữa Đá)</strong>：香濃微苦中和解膩。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">經典名店</span></div>
+            <div class="timeline-desc">在地人與老饕公認第一名！大骨熬製湯頭甘醇清甜，肉質鮮美軟嫩，長輩暖胃第一餐。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Pho+Le+District+3" target="_blank" class="btn-map">📍 錦麗河粉地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：錦麗河粉 ➔ 統一宮</span>
+          <span class="transit-time">車程約 8 分鐘 (約 2 公里，車費共約 NT$ 100)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">14:00 - 17:00</span>
+            <div class="timeline-title">統一宮 ‧ 中心郵政局 ‧ 紅教堂 ‧ 西貢書街 (深度3小時)</div>
+            <div class="business-hours">統一宮：08:00 - 16:30 (最晚售票 15:30) ｜ 郵局：07:30 - 18:00</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">📸 必訪特色亮點：</div>
+              • <strong>統一宮地下作戰碉堡</strong>：參觀越戰時期的軍用地圖室與密道設施。<br>
+              • <strong>西貢中心郵局復古木椅</strong>：寄一張手寫明信片回台灣。<br>
+              • <strong>西貢書街綠蔭大道</strong>：兩側法式咖啡座與特色手繪明信片。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-view">歷史地標</span><span class="tag tag-senior">平坦步道</span></div>
+            <div class="timeline-desc">長達 3 小時的完整深度導覽！先參觀南越總統府統一宮的內閣會議室、國宴大廳與地下碉堡；隨後步行穿越林蔭大道參觀百年古典拱頂西貢中心郵局、紅教堂外圍與西貢書街。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Independence+Palace" target="_blank" class="btn-map">📍 統一宮地圖</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Saigon+Central+Post+Office" target="_blank" class="btn-map" style="margin-left:6px;">📍 中心郵局地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚶【步行】：書街 ➔ Bếp Mẹ Ỉn 晚餐</span>
+          <span class="transit-time">步行約 8~10 分鐘 (約 650 公尺)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">17:15 - 19:15</span>
+            <div class="timeline-title">米其林推薦迎賓晚餐：Bếp Mẹ Ỉn</div>
+            <div class="business-hours">營業：10:30 - 22:30 無公休日</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🥘 必吃指名推薦：</div>
+              • <strong>陶鍋鮮蝦豬肉煎餅 (Bánh Xèo)</strong>：陶鍋現煎，外皮金黃香脆，包萵苣野菜沾魚露吃法最正宗！<br>
+              • <strong>整顆椰子炒飯 (Cơm Chiên Trái Dừa)</strong>：椰香米粒Q彈，拌入鮮蝦與椰肉碎。<br>
+              • <strong>古法砂鍋燉排骨肉 (Sườn Kho Tộ)</strong>：焦糖醬汁濃郁微甘，配飯絕品。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">米其林家常菜</span></div>
+            <div class="timeline-desc">口味溫和鮮甜、少油清爽，長者接受度 100%。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Bep+Me+In+Ho+Chi+Minh" target="_blank" class="btn-map">📍 Bếp Mẹ Ỉn 地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：餐廳 ➔ Vincom Center</span>
+          <span class="transit-time">車程約 6~8 分鐘 (約 1.1 公里，車費共約 NT$ 100)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">19:30 - 21:00</span>
+            <div class="timeline-title">晚餐後必訪：Vincom Center 旗艦商場 (第1晚)</div>
+            <div class="business-hours">商場與WinMart超市：09:30 - 22:00 全年無休</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🛒 地下 WinMart 超市必買：</div>
+              • <strong>當季現切熱帶水果盒</strong>：新鮮波羅蜜 (Mít)、紅毛丹 (Chôm chôm)、清甜山竹。<br>
+              • <strong>Vinamilk 蘆薈優格</strong>：酸甜解膩、助消化。<br>
+              • <strong>礦泉水與現剖椰子水</strong>：買回飯店房內冷藏飲用。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-shop">每晚必訪</span><span class="tag tag-senior">冷氣充足</span></div>
+            <div class="timeline-desc">第一晚造訪 Vincom！長輩在明亮寬敞的地下超市採買水果冷飲，吹冷氣散步消化後搭車回飯店辦理正式 Check-in 回房休息。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vincom+Center+Dong+Khoi" target="_blank" class="btn-map">📍 Vincom Center 地圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>💰 Day 1 預估費用 (全團8人)</h3>
+        <div class="summary-row"><span>專車接機 (16人座大車)</span><span>NT$ 900</span></div>
+        <div class="summary-row"><span>市區 Grab 車資 (2台車合計)</span><span>約 NT$ 320</span></div>
+        <div class="summary-row"><span>統一宮門票 (8人)</span><span>NT$ 600</span></div>
+        <div class="summary-row"><span>錦麗河粉午餐</span><span>NT$ 1,800</span></div>
+        <div class="summary-row"><span>Bếp Mẹ Ỉn 迎賓晚餐</span><span>NT$ 3,200</span></div>
+        <div class="summary-row"><span>當日費用合計 (不含超市)</span><span>約 NT$ 6,820</span></div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div id="day2" class="day-panel">
+      <div class="day-header">
+        <h2>Day 2：最強法包早餐 ‧ 咖啡公寓 ‧ 新定市場腰果 ‧ 回飯店放戰利品 ‧ 洗頭足浴 ‧ 遊船晚宴</h2>
+        <div class="day-meta">貼心調整 ｜ 買完大量堅果先回飯店放好 ｜ 兩手空空輕鬆吃午餐</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">08:00 - 08:30</span>
+            <div class="timeline-title">🌟 順路早餐首選：Bánh Mì Huỳnh Hoa 最強法式麵包</div>
+            <div class="business-hours">營業：06:00 - 22:00 (早晨前往免大排長龍！)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🥖 必吃指名推薦：</div>
+              • <strong>招牌特級綜合法式麵包 (Bánh Mì Đặc Biệt)</strong>：滿滿厚切越式火腿、肉凍、靈魂自製手作豬肝醬與醃蘿蔔。<br>
+              • <strong>點餐密技</strong>：8位長輩買 4 大份即可（請店家對切成 8 份），一人半份份量剛剛好，剛出爐酥脆度最高！
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">全越最強法包</span><span class="tag tag-senior">完全順路</span></div>
+            <div class="timeline-desc">自飯店步行僅 7 分鐘即達。早晨免去傍晚數十分鐘排隊人潮，買完趁熱帶著前往咖啡公寓！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Banh+Mi+Huynh+Hoa" target="_blank" class="btn-map">📍 Huỳnh Hoa 地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚶【步行】：Huỳnh Hoa ➔ 咖啡公寓</span>
+          <span class="transit-time">步行約 10~12 分鐘 (約 800 公尺，經阮惠大道)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">08:30 - 11:30</span>
+            <div class="timeline-title">咖啡公寓 ‧ 招牌熱蛋咖啡 (晨光法包悠閒3小時)</div>
+            <div class="business-hours">公寓各店普遍：08:00 - 22:00 (Little HaNoi 08:00開門)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">☕ 必吃必買推薦：</div>
+              • <strong>Little HaNoi 招牌熱蛋咖啡 (Egg Coffee)</strong>：高溫奶泡濃稠如卡士達慕斯，完全無生蛋腥味。<br>
+              • <strong>現烤芒果法式吐司</strong>：鬆軟多汁，配咖啡極搭。<br>
+              • <strong>文創帆布袋與刺繡杯墊</strong>：逐層逛手作小店必買手信。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">招牌蛋咖啡</span><span class="tag tag-view">文青聚落</span></div>
+            <div class="timeline-desc">搭電梯登上景觀樓層品嚐熱蛋咖啡，搭配剛買的酥脆 Huỳnh Hoa 法式麵包享用；俯瞰阮惠街晨光，隨後逐層探索特色小店與手作選物。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Cafe+Apartments" target="_blank" class="btn-map">📍 咖啡公寓地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：咖啡公寓 ➔ 粉紅教堂與新定市場</span>
+          <span class="transit-time">車程約 12~15 分鐘 (約 2.8 公里，車費共約 NT$ 130)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">11:45 - 13:15</span>
+            <div class="timeline-title">粉紅教堂拍照 ‧ 新定市場腰果批發大採購</div>
+            <div class="business-hours">粉紅教堂外圍全日開放 ｜ 新定市場攤位：06:00 - 18:00</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🥜 新定市場必買伴手禮：</div>
+              • <strong>帶皮 A 級大腰果 (Hạt điều lụa)</strong>：產地直送大顆飽滿，鹽炒帶皮香脆。<br>
+              • <strong>開口火山夏威夷豆 (Mắc ca)</strong>：附開殼鐵片，奶香十足。<br>
+              • <strong>天然鳳梨乾與芒果條</strong>：無添加糖精，店家現場試吃滿意再抽真空密封！
+            </div>
+
+            <div class="tag-container"><span class="tag tag-shop">長輩最愛市集</span><span class="tag tag-view">打卡拍照</span></div>
+            <div class="timeline-desc">在粉紅教堂外拍美照，隨後前往新定市場堅果批發攤現場試吃採買。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Tan+Dinh+Market" target="_blank" class="btn-map">📍 新定市場地圖</a>
+          </div>
+        </div>
+
+        <!-- 返回飯店放戰利品 -->
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：新定市場 ➔ 返回飯店放戰利品</span>
+          <span class="transit-time">車程約 10~12 分鐘 (約 2.8 公里，車費共約 NT$ 120)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">13:15 - 13:45</span>
+            <div class="timeline-title">🏨 先回飯店放腰果戰利品 ‧ 長輩洗手歇息</div>
+            <div class="tag-container"><span class="tag tag-senior">貼心免提重物</span></div>
+            <div class="timeline-desc">專車載回飯店，直接將沉甸甸的幾十包真空腰果放進房間！長輩在房間吹冷氣、上洗手間洗手整理，稍微坐著休息 15 分鐘，卸下負擔後再出門吃午餐。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Adora+Art+Hotel+Ho+Chi+Minh" target="_blank" class="btn-map">📍 飯店地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：飯店 ➔ 陳達金邊粿條午餐</span>
+          <span class="transit-time">車程約 8~10 分鐘 (約 2 公里，車費共約 NT$ 100)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">13:45 - 15:00</span>
+            <div class="timeline-title">特色午餐：陳達金邊粿條 (Hủ Tiếu Thành Đạt)</div>
+            <div class="business-hours">營業：24小時營業全年無休</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🍜 必吃指名推薦：</div>
+              • <strong>乾拌綜合粿條 (Hủ Tiếu Khô Đặc Biệt)</strong>：特調蒜香甜鹹醬汁拌勻彈牙粿條。<br>
+              • <strong>附贈鮮甜海鮮肉湯</strong>：內含鮮蝦、鵪鶉蛋、新鮮豬肝與肉丸，鮮甜無腥味。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">道地小吃</span></div>
+            <div class="timeline-desc">兩手空空輕鬆坐下來享用美食！口味清甜不油膩，長輩極為讚賞。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hu+Tieu+Nam+Vang+Thanh+Dat" target="_blank" class="btn-map">📍 陳達粿條地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：陳達粿條 ➔ 越式養生旗艦會館</span>
+          <span class="transit-time">車程約 10 分鐘 (約 2 公里，車費共約 NT$ 110)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">15:15 - 17:15</span>
+            <div class="timeline-title">🌟 升級：全套草本足浴 ＋ 越式古法洗頭 Combo (第 1 回)</div>
+            <div class="business-hours">營業：09:00 - 22:30 全年無休</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">💆 120分鐘頂級全套內容：</div>
+              • <strong>天然薑汁草本熱水足浴</strong> ＋ 足底穴位深度反射指壓。<br>
+              • <strong>天然小黃瓜清爽敷臉</strong> ＋ 臉部淋巴穴道排毒。<br>
+              • <strong>越式循環圓弧水療熏蒸洗髮</strong> ＋ 頭皮深層去角質。<br>
+              • <strong>熱石肩頸背部放鬆</strong> ＋ 吹整修護。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-spa">洗頭足浴全套</span><span class="tag tag-senior">長輩極度放鬆</span></div>
+            <div class="timeline-desc">長輩躺著徹底消除雙腿疲勞，全身舒暢煥然一新！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=duong+sinh+co+truyen+ho+chi+minh" target="_blank" class="btn-map">📍 養生洗頭會館地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：會館 ➔ 西貢河遊船碼頭</span>
+          <span class="transit-time">車程約 15 分鐘 (約 3.5 公里，車費共約 NT$ 140)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">17:30 - 20:00</span>
+            <div class="timeline-title">西貢河景觀遊船晚餐 (Saigon Princess)</div>
+            <div class="business-hours">登船：18:00 ｜ 啟航：19:15 - 21:15 (預訂需提前報到)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🚢 必嚐法越饗宴推薦：</div>
+              • <strong>椰香海鮮濃湯</strong> 或 <strong>法式奶油蘑菇湯</strong>。<br>
+              • <strong>嫩煎頂級鱸魚佐番紅花醬</strong> 或 <strong>香煎安格斯牛排</strong>。<br>
+              • <strong>經典焦糖布丁佐熱帶果泥</strong> ＋ 伴隨兩岸摩天大樓萬家燈火！
+            </div>
+
+            <div class="tag-container"><span class="tag tag-view">浪漫夜景</span><span class="tag tag-food">遊船套餐</span></div>
+            <div class="timeline-desc">登上平穩如鏡的西貢公主號遊船，一邊享用精緻套餐與現場樂隊演奏，一邊欣賞兩岸摩天大樓霓虹倒影，微風徐徐，是全家最難忘的水上夜景！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Nha+Rong+Port" target="_blank" class="btn-map">📍 遊船碼頭地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：碼頭 ➔ Vincom Center</span>
+          <span class="transit-time">車程約 10 分鐘 (約 2.5 公里，車費共約 NT$ 120)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">20:15 - 21:15</span>
+            <div class="timeline-title">晚餐後必訪：Vincom Center 旗艦商場 (第2晚)</div>
+            <div class="business-hours">商場與WinMart超市：09:30 - 22:00 全年無休</div>
+            <div class="tag-container"><span class="tag tag-shop">每晚必訪</span></div>
+            <div class="timeline-desc">遊船後漫步 Vincom，買現剖椰子水、熱帶水果與酸奶，隨後搭車回飯店。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vincom+Center+Dong+Khoi" target="_blank" class="btn-map">📍 Vincom Center 地圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>💰 Day 2 預估費用 (全團8人)</h3>
+        <div class="summary-row"><span>Huỳnh Hoa 最強法包早餐 (4大份對切8份)</span><span>NT$ 700</span></div>
+        <div class="summary-row"><span>咖啡公寓門票與蛋咖啡</span><span>NT$ 1,400</span></div>
+        <div class="summary-row"><span>市區 Grab 車資 (含回飯店多一趟，2台車合計)</span><span>約 NT$ 600</span></div>
+        <div class="summary-row"><span>陳達粿條午餐</span><span>NT$ 1,400</span></div>
+        <div class="summary-row"><span>草本足浴＋越式洗頭全套 (8人)</span><span>NT$ 6,000</span></div>
+        <div class="summary-row"><span>西貢河豪華遊船晚餐 (8人)</span><span>NT$ 7,200</span></div>
+        <div class="summary-row"><span>當日費用合計 (不含伴手禮)</span><span>約 NT$ 17,300</span></div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div id="day3" class="day-panel">
+      <div class="day-header">
+        <h2>Day 3：Klook 湄公河一日遊 ‧ Landmark 81 觀景台夕陽夜景 ‧ Vincom</h2>
+        <div class="day-meta">順路銜接最佳動線 ｜ 水鄉大自然 ➔ 傍晚無縫登上 81樓百萬夜景</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">07:20 - 07:50</span>
+            <div class="timeline-title">早晨外出早餐：飯店旁清爽越式牛肉河粉</div>
+            <div class="business-hours">營業：06:00 - 22:00</div>
+            <div class="tag-container"><span class="tag tag-food">在地早餐</span></div>
+            <div class="timeline-desc">08:00 出發前，帶長輩在飯店巷口品嚐熱騰騰的現煮生牛肉湯河粉，補充一日遊體力。</div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚐【Klook 專車接送】：08:00 飯店大廳接送出發</span>
+          <span class="transit-time">專屬中巴飯店直達美托 (高速公路約 1.5 ~ 2 小時，約 72 公里)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">08:00 - 17:00</span>
+            <div class="timeline-title">Klook 湄公河美托水鄉一日遊 (8人中文私人團)</div>
+            <div class="business-hours">景點營運：08:00 - 17:00 (永長寺07:30 - 17:30)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🥥 水鄉特色必吃必買：</div>
+              • <strong>現炸油亮象耳魚 (Cá Tai Tượng)</strong>：魚肉香酥，搭配米紙蔬菜現捲現吃。<br>
+              • <strong>中空香脆糯米恐龍蛋</strong>：外酥內 Q 甜鹹適中。<br>
+              • <strong>手作現包椰子糖 (Kẹo dừa)</strong>：剛出爐熱呼呼試吃最香，買原味與可可口味！
+            </div>
+
+            <div class="tag-container"><span class="tag tag-view">Klook官方團</span><span class="tag tag-senior">專屬中文導遊</span></div>
+            <div class="timeline-desc">
+              <strong>行程細項安排：</strong><br>
+              • <strong>10:00 - 10:45</strong>：參觀兩百年歷史古剎【永長寺】，欣賞雄偉大佛與庭園。<br>
+              • <strong>11:00 - 12:30</strong>：美托碼頭搭乘電動大船巡遊湄公河群島，換乘手搖舢舨木船穿梭於濃密的水椰林綠蔭河道，微風徐徐。<br>
+              • <strong>12:30 - 14:00</strong>：水鄉庭園風味午餐：酥炸象耳魚、烤大頭蝦、糯米恐龍蛋與米紙春捲。<br>
+              • <strong>14:00 - 15:30</strong>：參觀天然椰子糖手工坊，品嚐蜂蜜金桔茶、熱帶水果並欣賞才子民謠彈唱。<br>
+              • <strong>15:30 - 17:00</strong>：搭乘專屬中巴返回市區，回程送抵飯店稍作整理。
+            </div>
+            
+            <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+              <a href="https://www.klook.com/zh-TW/activity/29887-mekong-river-day-tour-ho-chi-minh/" target="_blank" class="btn-klook">🎫 Klook 官方行程詳情 (點此看細節)</a>
+              <a href="https://www.google.com/maps/search/?api=1&query=My+Tho+Boat+Station" target="_blank" class="btn-map">📍 美托碼頭地圖</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：飯店放隨身物品 ➔ Landmark 81</span>
+          <span class="transit-time">車程約 15 分鐘 (約 4.5 公里，車費共約 NT$ 140)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">17:30 - 20:00</span>
+            <div class="timeline-title">🌟 最佳時間點：Landmark 81 觀景台夕陽落日 ＋ 夜景晚餐</div>
+            <div class="business-hours">SkyView觀景台：10:00 - 22:00 (最後入場 20:30) ｜ 商場：09:30 - 22:00</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🌆 81樓打卡亮點：</div>
+              • <strong>79~81 樓全景落地玻璃</strong>：俯瞰蜿蜒西貢河與壯麗落日夕陽。<br>
+              • <strong>空中玻璃天橋與戶外區</strong>：由服務人員協助拍攝全家紀念合照。<br>
+              • <strong>商場景觀餐廳</strong>：吹冷氣享用精緻越式排骨碎米飯或粵式海鮮小聚。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-view">絕美天際線</span><span class="tag tag-food">景觀晚餐</span></div>
+            <div class="timeline-desc">一日遊後的完美大景！17:30 登臨觀景台正好迎來日落黃金時刻，俯瞰西貢河染上金黃色夕陽與全城萬家燈火點亮的魔幻時刻；隨後於商場特色餐廳吹冷氣舒適享用晚餐。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Landmark+81+Skyview" target="_blank" class="btn-map">📍 Landmark 81 地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：Landmark 81 ➔ Vincom Center</span>
+          <span class="transit-time">車程約 15 分鐘 (約 4 公里，車費共約 NT$ 140)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">20:30 - 21:30</span>
+            <div class="timeline-title">晚餐後必訪：Vincom Center 旗艦商場 (第3晚)</div>
+            <div class="business-hours">商場與WinMart超市：09:30 - 22:00 全年無休</div>
+            <div class="tag-container"><span class="tag tag-shop">每晚必訪</span></div>
+            <div class="timeline-desc">連續第 3 晚漫步 Vincom！長輩在商場散步吹冷氣，買甜品、優格與新鮮水果回飯店享用。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vincom+Center+Dong+Khoi" target="_blank" class="btn-map">📍 Vincom Center 地圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>💰 Day 3 預估費用 (全團8人)</h3>
+        <div class="summary-row"><span>越式河粉早餐</span><span>NT$ 600</span></div>
+        <div class="summary-row"><span>Klook 8人專屬中文導遊包團 (含車、船、午餐門票)</span><span>NT$ 8,800</span></div>
+        <div class="summary-row"><span>市區 Grab 車資 (2台車合計)</span><span>約 NT$ 280</span></div>
+        <div class="summary-row"><span>Landmark 81 觀景台門票 (8人)</span><span>NT$ 4,800</span></div>
+        <div class="summary-row"><span>81商場特色晚餐</span><span>NT$ 4,000</span></div>
+        <div class="summary-row"><span>當日費用合計</span><span>約 NT$ 18,480</span></div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div id="day4" class="day-panel">
+      <div class="day-header">
+        <h2>Day 4：樂天超市大採購 ‧ 全套洗頭足浴(第2回) ‧ 檳城市場與夜市吃透透 (2.5小時) ‧ Vincom</h2>
+        <div class="day-meta">全城大掃貨日 ｜ 充裕享受洗頭足浴 ｜ 檳城市場＋夜市2.5小時深度大吃</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">08:00 - 08:45</span>
+            <div class="timeline-title">08:00 出發：越式碳烤豬排碎米飯 (Cơm Tấm) 早餐</div>
+            <div class="business-hours">營業：06:30 - 21:00</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🍖 必吃指名推薦：</div>
+              • <strong>招牌厚切碳烤豬排碎米飯 (Cơm Tấm Sườn Nướng)</strong>：醃製香茅魚露焦香四溢，搭配煎太陽蛋與蒸肉絲糕 (Chả trứng)。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">在地美味</span></div>
+            <div class="timeline-desc">越南人的經典元氣早餐！厚切現烤排骨配煎蛋、肉絲餅與碎米飯，淋上甜辣魚露香氣四溢。</div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：第一區 ➔ 第七區樂天超市</span>
+          <span class="transit-time">車程約 20~25 分鐘 (約 6.5 公里，車費共約 NT$ 220)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">09:15 - 12:15</span>
+            <div class="timeline-title">樂天超市 (Lotte Mart 7區店) 伴手禮大掃貨 (3小時)</div>
+            <div class="business-hours">營業：07:30 - 22:00 全年無休</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🛒 樂天超市整箱必搬清單：</div>
+              • <strong>中原咖啡 (Trung Nguyên)</strong>：S 號咖啡粉、8 號貂牌咖啡豆。<br>
+              • <strong>G7 椰奶三合一即溶咖啡</strong>：濃濃熱帶椰香，長輩送禮首選。<br>
+              • <strong>新華園鹹蛋黃榴槤餅 (Bánh Pía)</strong>：千層酥皮內裹香濃榴槤與蛋黃。<br>
+              • <strong>酥脆椰子薄餅 (Bánh Dừa Nướng)</strong>：香脆無比，全家都愛！<br>
+              • <strong>Hảo Hảo 粉紅包裝酸辣蝦泡麵</strong>：每箱打包搬回台灣。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-shop">全城最便宜齊全</span><span class="tag tag-senior">冷氣推車</span></div>
+            <div class="timeline-desc">全西貢品項最齊全且批發價最便宜的大型量販店，推車冷氣舒適，整箱打包直接叫 Grab 載回飯店！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Lotte+Mart+District+7" target="_blank" class="btn-map">📍 樂天超市地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：樂天超市 ➔ 飯店放戰利品 ➔ 午餐</span>
+          <span class="transit-time">車程約 20 分鐘 (約 6.5 公里，車費共約 NT$ 220)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">12:45 - 14:00</span>
+            <div class="timeline-title">第一區特色午餐：牛肉火鍋 / 道地熱炒料理</div>
+            <div class="business-hours">營業：10:00 - 22:00</div>
+            <div class="tag-container"><span class="tag tag-food">豐盛午餐</span></div>
+            <div class="timeline-desc">在飯店周邊餐廳享用清甜的高湯牛肉鍋，多種時令野菜與米線，吃得舒服無負擔。</div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：餐廳 ➔ 越式草本養生會館</span>
+          <span class="transit-time">車程約 8 分鐘 (約 1.8 公里，車費共約 NT$ 100)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">14:15 - 16:15</span>
+            <div class="timeline-title">🌟 升級：全套草本足浴 ＋ 越式古法洗頭 Combo (第 2 回)</div>
+            <div class="business-hours">營業：09:00 - 22:30 全年無休</div>
+            <div class="tag-container"><span class="tag tag-spa">洗頭足浴全套</span><span class="tag tag-senior">長輩極度放鬆</span></div>
+            <div class="timeline-desc"><strong>採買後的及時回春：</strong>長輩推推車逛超市後，安排第二次頂級全套！享受草本熱敷足浴泡腳與足底穴位指壓，再由專業技師進行越式古法洗頭、草本水循環熏蒸、肩頸刮痧舒緩，躺著徹底消除雙腿疲勞，精神抖擻！</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=duong+sinh+co+truyen+ho+chi+minh" target="_blank" class="btn-map">📍 養生洗頭會館地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚶【步行】：洗頭館 ➔ 檳城市場</span>
+          <span class="transit-time">步行約 6~8 分鐘 (約 500 公尺)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">16:30 - 20:30</span>
+            <div class="timeline-title">🌟 大幅充裕：室內檳城市場 ＋ 檳城夜市大吃大逛 (整整 4 小時！)</div>
+            <div class="business-hours">室內市場：06:00 - 18:00 ｜ 外圍夜市：18:00 - 23:00 (18:30熱鬧成形)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🍢 夜市大快朵頤必吃推薦：</div>
+              • <strong>炭烤大頭蝦 (Tôm Càng Xanh Nướng)</strong>：肉質扎實鮮甜、蝦膏豐沛。<br>
+              • <strong>焗烤起司生蠔 (Hàu Nướng Phô Mai)</strong>：奶香濃郁、鮮嫩滑口。<br>
+              • <strong>現烤越式米紙披薩 (Bánh Tráng Nướng)</strong>：鵪鶉蛋、蝦米與青蔥脆口鹹香。<br>
+              • <strong>現打酪梨榴槤冰沙 (Sinh Tố Bơ Sầu Riêng)</strong>：濃郁綿密。
+            </div>
+
+            <div class="tag-container"><span class="tag tag-shop">經典市集</span><span class="tag tag-food">夜市大餐</span><span class="tag tag-senior">充裕時間</span></div>
+            <div class="timeline-desc">
+              • <strong>16:30 - 18:00 (室內市場)</strong>：挑選手工藝品、刺繡、滴漏咖啡壺與藤編包；<br>
+              • <strong>18:00 - 20:30 (外圍夜市大吃大逛)</strong>：街道封街夜市正式營業！今晚晚餐直接在夜市大快朵頤，長輩坐下來享用海鮮熱炒與果汁，邊吃邊挑選紀念品，享受西貢市井魅力。
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Ben+Thanh+Market" target="_blank" class="btn-map">📍 檳城市場地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：檳城市場 ➔ Vincom Center</span>
+          <span class="transit-time">車程約 6 分鐘 (約 1.2 公里，車費共約 NT$ 100)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">20:45 - 21:45</span>
+            <div class="timeline-title">晚餐後必訪：Vincom Center 旗艦商場 (第4晚)</div>
+            <div class="business-hours">商場與WinMart超市：09:30 - 22:00 全年無休</div>
+            <div class="tag-container"><span class="tag tag-shop">每晚必訪</span></div>
+            <div class="timeline-desc">連續第 4 晚漫步 Vincom！做最後的零食小補貨，回飯店將所有戰利品裝箱打包。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Vincom+Center+Dong+Khoi" target="_blank" class="btn-map">📍 Vincom Center 地圖</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>💰 Day 4 預估費用 (全團8人)</h3>
+        <div class="summary-row"><span>碎米飯早餐</span><span>NT$ 600</span></div>
+        <div class="summary-row"><span>市區 Grab 車資 (2台車合計)</span><span>約 NT$ 640</span></div>
+        <div class="summary-row"><span>特色牛肉鍋午餐</span><span>NT$ 2,400</span></div>
+        <div class="summary-row"><span>草本足浴＋越式洗頭全套 (8人)</span><span>NT$ 6,000</span></div>
+        <div class="summary-row"><span>檳城夜市豐盛海鮮與小吃晚餐</span><span>NT$ 3,600</span></div>
+        <div class="summary-row"><span>當日費用合計 (不含超市)</span><span>約 NT$ 13,240</span></div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div id="day5" class="day-panel">
+      <div class="day-header">
+        <h2>Day 5：堤岸天后宮 ‧ Pizza 4P's歡送午宴 ‧ 西貢河漫步 ‧ 專車送機 (中華航空 CI784)</h2>
+        <div class="day-meta">17:15 起飛超充裕 ｜ 14:15 專車送機 ｜ 享受完整白天時光</div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">08:00 - 08:45</span>
+            <div class="timeline-title">08:00 出發：飯店退房寄行李 ＋ 外出享用早餐</div>
+            <div class="business-hours">營業：06:00 - 22:00</div>
+            <div class="tag-container"><span class="tag tag-senior">長輩退房</span></div>
+            <div class="timeline-desc">辦理退房，8 件大行李全數寄放於飯店櫃檯。隨後步行至鄰近越式河粉店享用熱騰騰的現煮早餐。</div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：飯店 ➔ 第五區堤岸天后宮</span>
+          <span class="transit-time">車程約 18~22 分鐘 (約 5.5 公里，車費共約 NT$ 180)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">09:15 - 11:00</span>
+            <div class="timeline-title">華人區堤岸天后宮 (Chùa Bà Thiên Hậu)</div>
+            <div class="business-hours">開放：06:30 - 16:30 全年無休 (免費參觀)</div>
+            <div class="tag-container"><span class="tag tag-view">歷史古廟</span></div>
+            <div class="timeline-desc">造訪兩百年歷史天后古廟，欣賞石灣陶塑屋頂與巨型螺旋香環，順道漫步富有懷舊韻味的華人中藥街。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Ba+Thien+Hau+Temple" target="_blank" class="btn-map">📍 堤岸天后宮地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚗【叫 2 台 Grab】：天后宮 ➔ Pizza 4P's 濱城店</span>
+          <span class="transit-time">車程約 15 分鐘 (約 4.5 公里，車費共約 NT$ 160)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">11:30 - 13:30</span>
+            <div class="timeline-title">全越最強名店歡送午宴：Pizza 4P's</div>
+            <div class="business-hours">營業：10:00 - 23:00 (建議提前訂位)</div>
+            
+            <div class="must-try-box">
+              <div class="must-try-title">🍕 4P's 必點神級招牌：</div>
+              • <strong>招牌自製布拉塔莫札瑞拉起司披薩 (Burrata Parma Ham)</strong>：切開鮮奶酪如絲綢般流淌，配帕瑪火腿入口即化！<br>
+              • <strong>鮮蝦明太子披薩</strong>：海味鹹香微甘，長輩超愛。<br>
+              • <strong>蟹肉番茄奶油義大利麵 (Crab Tomato Cream)</strong>：整盤滿滿拆好鮮甜蟹肉！
+            </div>
+
+            <div class="tag-container"><span class="tag tag-food">國際驚豔美食</span></div>
+            <div class="timeline-desc">改以全越口碑最強的餐廳作結！環境明亮優雅、披薩薄脆清爽，長輩一致讚不絕口。</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=Pizza+4Ps+Ben+Thanh" target="_blank" class="btn-map">📍 Pizza 4P's 地圖</a>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚶【步行】：餐廳 ➔ 西貢河畔公園 ➔ 飯店取行李</span>
+          <span class="transit-time">步行散步約 15 分鐘 (欣賞西貢河沿岸風光)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">13:45 - 14:15</span>
+            <div class="timeline-title">西貢河畔林蔭漫步 ‧ 領取行李</div>
+            <div class="business-hours">河岸公園全日開放</div>
+            <div class="tag-container"><span class="tag tag-view">河岸景觀</span></div>
+            <div class="timeline-desc">在西貢河畔公園散步拍照，隨後返回飯店領取寄放行李，準備搭乘專車送機。</div>
+          </div>
+        </div>
+
+        <div class="transit-card">
+          <span>🚐【專車送機】：14:15 飯店大廳領行李出發 ➔ 新山一機場</span>
+          <span class="transit-time">16人座專車直達出境大廳 (車程約 30~40 分鐘)</span>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">14:45 - 17:15</span>
+            <div class="timeline-title">抵達機場 ‧ 輕鬆託運候機 (中華航空 CI784)</div>
+            <div class="business-hours">機場全日營運</div>
+            <div class="tag-container"><span class="tag tag-senior">華航返台</span></div>
+            <div class="timeline-desc">提前 2.5 小時抵達國際航廈辦理中華航空登機與托運手續。入關後長輩悠閒坐在候機室休息。</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <span class="timeline-time">17:15 - 21:40</span>
+            <div class="timeline-title">華航班機起飛 ‧ 平安返抵台北桃園機場 (TPE)</div>
+            <div class="business-hours">預計 21:40 返抵台灣</div>
+            <div class="tag-container"><span class="tag tag-senior">經典國籍航空</span></div>
+            <div class="timeline-desc">搭乘中華航空 CI784，享受精緻機上影音娛樂與熱騰騰機上餐，晚間約 21:40 平安返抵台灣，回家好好休息！</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <h3>💰 Day 5 預估費用 (全團8人)</h3>
+        <div class="summary-row"><span>現煮早餐</span><span>NT$ 600</span></div>
+        <div class="summary-row"><span>市區 Grab 車資 (2台車合計)</span><span>約 NT$ 340</span></div>
+        <div class="summary-row"><span>Pizza 4P's 歡送午宴</span><span>NT$ 4,800</span></div>
+        <div class="summary-row"><span>專車送機 (16人座大車)</span><span>NT$ 900</span></div>
+        <div class="summary-row"><span>當日費用合計</span><span>約 NT$ 6,640</span></div>
+      </div>
+    </div>
+
+    <!-- BUDGET PANEL -->
+    <div id="budget" class="day-panel">
+      <div class="day-header">
+        <h2>💰 全團 8 人預算總彙整 (中華航空真實行情版)</h2>
+        <div class="day-meta">全團總預算約 NT$ 24.1 萬 ｜ 每人約 NT$ 30,126</div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>項目類別</th>
+              <th>內容說明</th>
+              <th>8人總計 (NTD)</th>
+              <th>每人平均 (NTD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background-color: #eff6ff;">
+              <td><strong>中華航空機票</strong></td>
+              <td>CI781 / CI784 早去晚回 (華航官網含稅含托運 $19,203/人)</td>
+              <td><strong>$153,624</strong></td>
+              <td><strong>$19,203</strong></td>
+            </tr>
+            <tr>
+              <td><strong>四星家庭房住宿</strong></td>
+              <td>Adora / Cochin 兩間四人房 × 4晚 (純訂房不含早餐)</td>
+              <td>$16,800</td>
+              <td>$2,100</td>
+            </tr>
+            <tr>
+              <td><strong>專車接送機</strong></td>
+              <td>機場往返飯店 16人座專屬大車接送 (去回各一趟)</td>
+              <td>$1,800</td>
+              <td>$225</td>
+            </tr>
+            <tr>
+              <td><strong>市區 Grab 車資</strong></td>
+              <td>市區景點移動 (全期每次叫 2 台 7 人座 GrabCar)</td>
+              <td>$2,080</td>
+              <td>$260</td>
+            </tr>
+            <tr>
+              <td><strong>Klook 湄公河一日遊</strong></td>
+              <td>8 人專屬獨立中文團 (含飯店接送中巴、船票、象耳魚午餐)</td>
+              <td>$8,800</td>
+              <td>$1,100</td>
+            </tr>
+            <tr>
+              <td><strong>全期特色美食</strong></td>
+              <td>Pizza 4P's、西貢河遊船晚宴、錦麗、Bếp Mẹ Ỉn、81晚餐、夜市、蛋咖啡</td>
+              <td>$28,500</td>
+              <td>$3,562</td>
+            </tr>
+            <tr>
+              <td><strong>門票與洗頭足浴SPA</strong></td>
+              <td>2次全套草本足浴洗頭Combo (8人) + Landmark 81門票 + 統一宮門票</td>
+              <td>$17,400</td>
+              <td>$2,175</td>
+            </tr>
+            <tr>
+              <td><strong>簽證與旅遊平安險</strong></td>
+              <td>越南電子簽證 (E-Visa $25/人) + 旅平險</td>
+              <td>$12,000</td>
+              <td>$1,500</td>
+            </tr>
+            <tr style="background-color: var(--primary-light); font-weight: 700;">
+              <td><strong>總計 (不含個人購物)</strong></td>
+              <td><strong>實玩整整 5 天、華航早去晚回、2次全套洗頭足浴</strong></td>
+              <td><strong>約 NT$ 241,004</strong></td>
+              <td><strong>約 NT$ 30,126</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tip-box">
+        <h4>⚠️ 小費與伴手禮小叮嚀：</h4>
+        <p>1. <strong>小費準備</strong>：飯店行李員每件約 20,000 VND；床頭清潔每天每房 20,000 VND；洗頭足浴 SPA 滿意時每位技師約 50,000~100,000 VND；湄公河一日遊結束時導遊加司機約 200,000~300,000 VND / 團。</p>
+        <p>2. <strong>伴手禮分工</strong>：帶皮腰果在 <strong>Day 2 新定市場</strong> 買（現場試吃抽真空）；咖啡、榴槤餅與泡麵在 <strong>Day 4 樂天超市</strong> 一次搬齊；每晚在 <strong>Vincom</strong> 買水果零食。</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var dayList = ['day1', 'day2', 'day3', 'day4', 'day5', 'budget'];
+    var currentDay = 'day1';
+
+    function switchDay(targetId) {
+      currentDay = targetId;
+      var panels = document.querySelectorAll('.day-panel');
+      for (var i = 0; i < panels.length; i++) {
+        panels[i].style.display = 'none';
+        panels[i].classList.remove('active');
+      }
+
+      var buttons = document.querySelectorAll('.nav-tab-btn');
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove('active');
+      }
+
+      var p = document.getElementById(targetId);
+      if (p) {
+        p.style.display = 'block';
+        p.classList.add('active');
+      }
+
+      var b = document.getElementById('btn-' + targetId);
+      if (b) {
+        b.classList.add('active');
+        b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function prevDay() {
+      var idx = dayList.indexOf(currentDay);
+      if (idx > 0) {
+        switchDay(dayList[idx - 1]);
+      }
+    }
+
+    function nextDay() {
+      var idx = dayList.indexOf(currentDay);
+      if (idx < dayList.length - 1) {
+        switchDay(dayList[idx + 1]);
+      }
+    }
+
+    var currentLiveRate = 800;
+
+    function fetchLiveExchangeRate(isManualRefresh) {
+      var statusText = document.getElementById('statusText');
+      var rateStatus = document.getElementById('rateStatus');
+      var rateDisplay = document.getElementById('rateDisplay');
+      var statusDot = document.getElementById('statusDot');
+
+      if (isManualRefresh && statusText) {
+        statusText.innerText = '連線更新中...';
+      }
+
+      fetch('https://open.er-api.com/v6/latest/TWD')
+        .then(function(res) {
+          if (!res.ok) throw new Error('API 連線異常');
+          return res.json();
+        })
+        .then(function(data) {
+          if (data && data.rates && data.rates.VND) {
+            currentLiveRate = Math.round(data.rates.VND * 10) / 10;
+            if (rateDisplay) rateDisplay.innerText = currentLiveRate.toLocaleString();
+            if (rateStatus) rateStatus.className = 'rate-status status-live';
+            if (statusDot) statusDot.innerText = '🟢';
+            if (statusText) statusText.innerText = '即時匯率已連線';
+            calcVNDtoNTD();
+          }
+        })
+        .catch(function(err) {
+          console.warn('匯率離線備援模式啟動:', err);
+          currentLiveRate = 800;
+          if (rateDisplay) rateDisplay.innerText = '800';
+          if (rateStatus) rateStatus.className = 'rate-status status-fallback';
+          if (statusDot) statusDot.innerText = '🟡';
+          if (statusText) statusText.innerText = '離線基準 (1:800)';
+        });
+    }
+
+    function calcVNDtoNTD() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (!inputV || !inputN) return;
+      var vndVal = parseFloat(inputV.value);
+      if (!isNaN(vndVal) && vndVal >= 0) {
+        inputN.value = Math.round((vndVal / currentLiveRate) * 10) / 10;
+      } else {
+        inputN.value = '';
+      }
+    }
+
+    function calcNTDtoVND() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (!inputV || !inputN) return;
+      var ntdVal = parseFloat(inputN.value);
+      if (!isNaN(ntdVal) && ntdVal >= 0) {
+        inputV.value = Math.round(ntdVal * currentLiveRate);
+      } else {
+        inputV.value = '';
+      }
+    }
+
+    function quickAddVND(amount) {
+      var inputV = document.getElementById('inputVND');
+      if (inputV) {
+        inputV.value = amount;
+        calcVNDtoNTD();
+      }
+    }
+
+    function clearCalc() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (inputV) inputV.value = '';
+      if (inputN) inputN.value = '';
+    }
+
+    function toggleConverterFocus() {
+      var card = document.getElementById('currencyCard');
+      var inputV = document.getElementById('inputVND');
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (inputV) inputV.focus();
+    }
+
+    window.onload = function() {
+      switchDay('day1');
+      fetchLiveExchangeRate(false);
+    };
+  </script>
+</body>
+</html>
