@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>胡志明市 5天4夜 孝親自由行手冊 (Grab全行程純淨版)</title>
+  <style>
+    :root {
+      --primary: #134e4a;       /* 越式熱帶深綠 */
+      --primary-light: #f0fdfa;
+      --primary-dark: #042f2e;
+      --gold: #b48325;          /* 星宇金棕 */
+      --gold-light: #fefce8;
+      --accent: #c2410c;         /* 熱帶暖橙 */
+      --resort-bg: #f8faf5;     /* 渡假暖沙米白 */
+      --transit-bg: #f1f5f9;
+      --transit-border: #cbd5e1;
+      --must-bg: #fff7ed;
+      --must-border: #ea580c;
+      --calc-bg: #f0fdf4;
+      --calc-border: #16a34a;
+      --trans-bg: #eff6ff;
+      --trans-border: #3b82f6;
+      --grab-green: #00b14f;     /* Grab 官方綠 */
+      --gray-50: #fbfbf8;
+      --gray-100: #f4f4ee;
+      --gray-200: #e5e5dc;
+      --gray-700: #475569;
+      --gray-800: #1e293b;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(19, 78, 74, 0.08);
+      --radius: 16px;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--resort-bg);
+      background-image: radial-gradient(#e6ede3 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--gray-800);
+      line-height: 1.6;
+      padding-bottom: 110px;
+    }
+    header {
+      background: linear-gradient(135deg, #09332f, #134e4a 65%, #2a6157);
+      color: #fdfcf7;
+      padding: 24px 16px 18px;
+      text-align: center;
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
+      box-shadow: 0 6px 20px rgba(9, 51, 47, 0.25);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #fef08a;
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    header p {
+      font-size: 0.85rem;
+      opacity: 0.95;
+      color: #ccfbf1;
+    }
+    .flight-pill {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-top: 10px;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 5px;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .flight-pill strong {
+      color: #fef08a;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 14px;
+    }
+
+    /* 雙時區條狀小工具 */
+    .clock-strip {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 10px 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-200);
+      margin: 12px 0 12px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--gray-700);
+    }
+    .clock-strip strong {
+      font-size: 1.02rem;
+      color: var(--primary-dark);
+      margin-left: 4px;
+    }
+
+    /* 常駐首頁：長輩越南旅遊安全注意事項大看板 */
+    .safety-board {
+      background: linear-gradient(135deg, #fffbeb, #fef3c7);
+      border: 2px solid #fde68a;
+      border-radius: var(--radius);
+      padding: 16px 16px 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .safety-board-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #92400e;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      border-bottom: 1.5px dashed #fcd34d;
+      padding-bottom: 8px;
+    }
+    .safety-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: #78350f;
+      line-height: 1.55;
+    }
+    .safety-item-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .safety-item-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+    .safety-emergency-box {
+      margin-top: 10px;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid #fcd34d;
+      font-size: 0.78rem;
+      color: #b45309;
+    }
+    .safety-emergency-box strong {
+      color: #b91c1c;
+    }
+
+    /* 頂部固定導航列 */
+    .nav-sticky-box {
+      position: sticky;
+      top: 0;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      padding: 10px 4px 8px;
+      z-index: 9999;
+      border-bottom: 1.5px solid var(--gray-200);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .nav-bar-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .arrow-btn {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .nav-scroll-track {
+      display: flex;
+      overflow-x: scroll;
+      -webkit-overflow-scrolling: touch;
+      gap: 6px;
+      padding: 2px 4px;
+      flex-grow: 1;
+      scrollbar-width: thin;
+    }
+    .nav-tab-btn {
+      flex: 0 0 auto;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      padding: 8px 14px;
+      border-radius: 9999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: var(--gray-700);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-tab-btn.active {
+      background: var(--primary) !important;
+      color: #ffffff !important;
+      border-color: var(--primary) !important;
+      box-shadow: 0 2px 8px rgba(19, 78, 74, 0.35);
+    }
+
+    /* 內容面板：移除了容易與 JS 行內樣式打架的 !important 規則 */
+    .day-panel {
+      display: none;
+    }
+
+    .day-header {
+      background: var(--card-bg);
+      border-left: 5px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      margin: 12px 0 16px;
+      box-shadow: var(--shadow);
+    }
+    .day-header h2 {
+      font-size: 1.12rem;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .day-header .day-meta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* 時間軸結構 */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 20px;
+      width: 2px;
+      background: #cbd5e1;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .timeline-dot {
+      position: absolute;
+      left: -20px;
+      top: 14px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+    .timeline-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray-200);
+      overflow: hidden;
+    }
+    .timeline-time {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .timeline-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+    }
+    .business-hours {
+      font-size: 0.76rem;
+      color: #047857;
+      background: #ecfdf5;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    /* 景點主題徽章卡 */
+    .spot-theme-card {
+      background: linear-gradient(135deg, #f0fdfa, #e6fffa);
+      border: 1.5px solid #99f6e4;
+      border-radius: 12px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .spot-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(19, 78, 74, 0.2);
+    }
+    .spot-info-text {
+      flex: 1;
+    }
+    .spot-info-name {
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .spot-info-sub {
+      font-size: 0.75rem;
+      color: #0d9488;
+      font-weight: 600;
+    }
+
+    /* 必吃特色框 */
+    .must-try-box {
+      background-color: var(--must-bg);
+      border: 1px dashed var(--must-border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin: 8px 0 10px;
+      font-size: 0.8rem;
+      color: #9a3412;
+      line-height: 1.5;
+    }
+    .must-try-title {
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 3px;
+      color: #c2410c;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      margin-bottom: 10px;
+    }
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .tag-food { background: #fee2e2; color: #991b1b; }
+    .tag-view { background: #e0e7ff; color: #3730a3; }
+    .tag-shop { background: #fef3c7; color: #92400e; }
+    .tag-senior { background: #dcfce7; color: #166534; }
+    .tag-spa { background: #fae8ff; color: #86198f; }
+
+    /* 按鈕樣式 */
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .btn-real-photo {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #86efac;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .btn-klook {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffedd5;
+      color: #ea580c;
+      border: 1.5px solid #fdba74;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      box-shadow: 0 1px 3px rgba(234, 88, 12, 0.15);
+    }
+
+    /* 交通耗時卡片 */
+    .transit-card {
+      margin: 8px 0 8px 6px;
+      padding: 8px 12px;
+      background: var(--transit-bg);
+      border-left: 4px solid var(--grab-green);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .transit-time {
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    /* 費用卡片 */
+    .summary-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      margin-top: 14px;
+      border: 1px solid var(--gray-200);
+    }
+    .summary-card h3 {
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      color: var(--gray-800);
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.84rem;
+      padding: 5px 0;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+    .summary-row:last-child {
+      border-bottom: none;
+      font-weight: 700;
+      color: var(--primary);
+      padding-top: 6px;
+    }
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 14px 0;
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    th {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .tip-box {
+      background-color: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 14px 0;
+      font-size: 0.85rem;
+      color: #78350f;
+    }
+
+    /* 右下角 4 鍵懸浮群組 */
+    .fab-container {
+      position: fixed;
+      bottom: 20px;
+      right: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 10000;
+    }
+    .fab-btn {
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.65rem;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.22);
+      transition: transform 0.15s ease;
+    }
+    .fab-btn:active {
+      transform: scale(0.92);
+    }
+    .fab-btn span {
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+    .fab-weather { background: linear-gradient(135deg, #0284c7, #0369a1); }
+    .fab-grab { background: linear-gradient(135deg, #00b14f, #059669); }
+    .fab-calc { background: linear-gradient(135deg, #15803d, #16a34a); }
+    .fab-trans { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
+
+    /* 彈窗樣式 (通用 Sheet) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 20000;
+      align-items: flex-end;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-sheet {
+      background: #ffffff;
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      padding: 20px 18px 28px;
+      overflow-y: auto;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.25s ease-out;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 10px;
+    }
+    .modal-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .modal-close-btn {
+      background: #f1f5f9;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      color: #475569;
+    }
+
+    /* 水平單列左右滑動滾動軌道 */
+    .hourly-scroll-track {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      overflow-x: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
+      gap: 8px !important;
+      padding: 4px 2px 14px !important;
+      margin-bottom: 14px !important;
+      scrollbar-width: thin !important;
+    }
+    .hourly-pill {
+      flex: 0 0 76px !important;
+      width: 76px !important;
+      box-sizing: border-box !important;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .hourly-pill.current-active {
+      background: #ecfdf5;
+      border: 1.5px solid #10b981;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.2);
+    }
+    .hourly-time {
+      font-size: 0.72rem;
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .hourly-icon {
+      font-size: 1.35rem;
+      margin: 2px 0;
+      line-height: 1;
+    }
+    .hourly-temp {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1e293b;
+    }
+    .hourly-pop {
+      font-size: 0.7rem;
+      color: #2563eb;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .weekly-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .weekly-table tr {
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .weekly-table td {
+      padding: 9px 4px;
+    }
+
+    /* Grab 下載與步驟 */
+    .grab-download-box {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0 14px;
+    }
+    .btn-grab-dl {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: white;
+    }
+    .btn-ios { background: #000000; }
+    .btn-android { background: #01875f; }
+    .grab-step-card {
+      background: #f8fafc;
+      border-left: 4px solid var(--grab-green);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+      color: #334155;
+    }
+    .grab-step-card strong {
+      color: #0f172a;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.86rem;
+    }
+
+    /* 彈窗內的翻譯與換算元件 */
+    .lang-toggle-btn {
+      background: #dbeafe;
+      border: 1px solid #93c5fd;
+      color: #1e40af;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .trans-input-box {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .trans-text-input {
+      flex: 1;
+      padding: 10px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .trans-text-input:focus {
+      border-color: #3b82f6;
+    }
+    .voice-btn {
+      background: #fee2e2;
+      border: 1.5px solid #fca5a5;
+      color: #b91c1c;
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .voice-btn.recording {
+      background: #dc2626;
+      color: white;
+      animation: pulse 0.8s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+      70% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+      100% { transform: scale(1); }
+    }
+    .trans-action-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 0 16px;
+      height: 44px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .voice-status-hint {
+      font-size: 0.72rem;
+      color: #dc2626;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: none;
+    }
+    .trans-result-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 8px;
+    }
+    .trans-result-row {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .trans-result-row:last-child {
+      margin-bottom: 0;
+    }
+    .trans-lang-lbl {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-right: 6px;
+    }
+    .lbl-zh { background: #e2e8f0; color: #334155; }
+    .lbl-vi { background: #fee2e2; color: #991b1b; }
+    .speak-btn {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 6px;
+      color: #1e40af;
+    }
+
+    /* 換算器內部樣式 */
+    .rate-status {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .status-live { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+    .status-fallback { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+    .current-rate-display {
+      font-size: 0.78rem;
+      color: #475569;
+      background: var(--calc-bg);
+      padding: 6px 12px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .current-rate-display strong {
+      color: #15803d;
+      font-size: 0.9rem;
+    }
+    .btn-refresh-rate {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      color: #334155;
+    }
+    .calc-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .calc-field {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .calc-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--gray-700);
+    }
+    .calc-input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .calc-input {
+      width: 100%;
+      padding: 10px 38px 10px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--gray-800);
+      outline: none;
+      background: #fafafa;
+    }
+    .calc-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+    .calc-unit {
+      position: absolute;
+      right: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #94a3b8;
+    }
+    .quick-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .quick-btn {
+      background: var(--calc-bg);
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .calc-hint {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 右下角 4 鍵懸浮群組 -->
+  <div class="fab-container">
+    <button class="fab-btn fab-weather" onclick="toggleWeatherModal(true)" title="查看胡志明市逐時天氣">
+      <span>☀️</span>
+      天氣
+    </button>
+    <button class="fab-btn fab-grab" onclick="toggleGrabModal(true)" title="查看 Grab 叫車手把手教學">
+      <span>🚗</span>
+      Grab
+    </button>
+    <button class="fab-btn fab-calc" onclick="toggleCurrencyModal(true)" title="呼叫匯率計算機">
+      <span>💱</span>
+      換算
+    </button>
+    <button class="fab-btn fab-trans" onclick="toggleTranslatorModal(true)" title="呼叫中越翻譯器">
+      <span>🗣️</span>
+      翻譯
+    </button>
+  </div>
+
+  <!-- 1. 氣象詳細面板彈窗 -->
+  <div class="modal-overlay" id="weatherModal" onclick="closeModalOnOverlay(event, 'weatherModal')">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">☀️ 胡志明市氣象逐時與一週預報</div>
+          <div style="font-size:0.75rem; color:#64748b;" id="weatherLiveSyncTime">正在即時同步胡志明市氣象...</div>
+        </div>
+        <button class="modal-close-btn" onclick="toggleWeatherModal(false)">✕</button>
+      </div>
+
+      <div style="font-size:0.82rem; font-weight:800; color:var(--primary); margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+        <span>⏱️ 未來 24 小時逐時氣象 (請向右滑動 ➔)：</span>
+        <button onclick="fetchLiveWeather(true)" style="background:none; border:none; color:#0284c7; font-size:0.75rem; font-weight:700; cursor:pointer;">🔄 重新整理</button>
+      </div>
+
+      <!-- 水平橫列左右滑動容器 -->
+      <div class="hourly-scroll-track" id="hourlyForecastTrack">
+        <div style="padding:15px; font-size:0.82rem; color:#64748b;">氣象載入中...</div>
+      </div>
+
+      <div style="font-size:0.82rem; font-weight:800; color:var(--primary); margin-bottom:8px;">
+        📅 未來 7 天一週間氣溫與降雨機率：
+      </div>
+      <table class="weekly-table" id="weeklyForecastTable">
+        <tbody>
+          <tr><td style="color:#64748b;">預報載入中...</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:16px; text-align:center;">
+        <a href="https://www.accuweather.com/zh/vn/ho-chi-minh-city/353981/weather-forecast/353981" target="_blank" class="btn-map" style="background:#f0fdf4; color:#15803d; border-color:#86efac;">
+          🛰️ 開啟 AccuWeather 即時雷達與紫外線預報
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Grab 叫車手把手教學彈窗 -->
+  <div class="modal-overlay" id="grabModal" onclick="closeModalOnOverlay(event, 'grabModal')">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" style="color:var(--grab-green); display:flex; align-items:center; gap:6px;">
+            <span>🚗</span> Grab 叫車安裝與使用手把手教學
+          </div>
+          <div style="font-size:0.75rem; color:#64748b;">越南自由行必備 ‧ 8人全期叫車攻略</div>
+        </div>
+        <button class="modal-close-btn" onclick="toggleGrabModal(false)">✕</button>
+      </div>
+
+      <div style="font-size:0.82rem; font-weight:800; color:#334155; margin-bottom:6px;">
+        📱 第一步：點擊下方連結下載官方 App (請在台灣先下載好)
+      </div>
+      <div class="grab-download-box">
+        <a href="https://apps.apple.com/app/grab-taxi-food-delivery/id647268330" target="_blank" class="btn-grab-dl btn-ios">
+          🍏 iPhone (App Store)
+        </a>
+        <a href="https://play.google.com/store/apps/details?id=com.grabtaxi.passenger" target="_blank" class="btn-grab-dl btn-android">
+          🤖 Android (Google Play)
+        </a>
+      </div>
+
+      <div class="grab-step-card">
+        <strong>1. 在台灣先完成手機號碼註冊</strong>
+        使用台灣門號接收 SMS 簡訊驗證碼即可完成帳號設定。在越南更換為當地網卡後，App 帳號依然能正常運作。
+      </div>
+
+      <div class="grab-step-card">
+        <strong>2. 建議在台灣先綁定信用卡 (GrabPay)</strong>
+        在「帳戶 ➔ 支付方式」綁定海外刷卡高回饋信用卡。下車直接扣款，完全不必掏現金找零，避免司機找錯錢或算不清楚！
+      </div>
+
+      <div class="grab-step-card">
+        <strong>3. 如何搜尋目的地與選車型 (8人分叫兩台大車)</strong>
+        • 點擊首頁「Car (汽車)」<br>
+        • 輸入景點英文名稱或手冊內的地圖地址<br>
+        • 選擇 **「GrabCar 7-Seater (7人座大車)」**，行李箱或長輩坐起來最寬敞<br>
+        • 8 位大人請分叫 **2 台 GrabCar 7-Seater**，螢幕會直接顯示固定金額，絕不加價！
+      </div>
+
+      <div class="grab-step-card">
+        <strong>4. 上車前務必核對車牌與車型</strong>
+        車輛抵達時，核對車牌號碼是否與 App 顯示完全一致才上車。路上絕不搭乘路邊主動搭訕招攬的偽裝司機！
+      </div>
+
+      <div class="grab-step-card" style="margin-bottom:0;">
+        <strong>5. 內建自動雙向翻譯聊天室</strong>
+        司機到達前若傳訊息（例如說他停在幾號柱），App 會自動把越文翻譯成中文，點擊預設訊息也能直接溝通，完全不會越語也暢行無阻！
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 即時匯率換算彈窗 -->
+  <div class="modal-overlay" id="currencyModal" onclick="closeModalOnOverlay(event, 'currencyModal')">
+    <div class="modal-sheet" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title" style="color:var(--primary); display:flex; align-items:center; gap:6px;">
+            <span>💱</span> 台幣 ⇄ 越南盾 即時換算
+          </div>
+          <div style="font-size:0.75rem; color:#64748b;">即時匯率連網 ‧ 菜單長輩速算</div>
+        </div>
+        <button class="modal-close-btn" onclick="toggleCurrencyModal(false)">✕</button>
+      </div>
+
+      <div class="current-rate-display">
+        <span>連線即時匯率：1 NTD ≈ <strong id="rateDisplay">800</strong> VND</span>
+        <div id="rateStatus" class="rate-status status-live" style="margin-left:auto; margin-right:8px;">
+          <span id="statusDot">🟢</span> <span id="statusText">已連線</span>
+        </div>
+        <button class="btn-refresh-rate" onclick="fetchLiveExchangeRate(true)">🔄 更新</button>
+      </div>
+
+      <div class="calc-row">
+        <div class="calc-field">
+          <label class="calc-label">越南盾 (VND)：</label>
+          <div class="calc-input-wrapper">
+            <input type="number" id="inputVND" class="calc-input" placeholder="例如: 150000" oninput="calcVNDtoNTD()">
+            <span class="calc-unit">₫</span>
+          </div>
+        </div>
+        <div style="font-weight: 800; color: #94a3b8; font-size: 1.2rem; padding-top: 18px;">⇄</div>
+        <div class="calc-field">
+          <label class="calc-label">新台幣 (NTD)：</label>
+          <div class="calc-input-wrapper">
+            <input type="number" id="inputNTD" class="calc-input" placeholder="例如: 200" oninput="calcNTDtoVND()">
+            <span class="calc-unit">NT$</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quick-tags">
+        <span style="font-size:0.75rem; color:#64748b; align-self:center;">菜單K快捷：</span>
+        <button class="quick-btn" onclick="quickAddVND(30000)">30k (河粉)</button>
+        <button class="quick-btn" onclick="quickAddVND(60000)">60k (咖啡)</button>
+        <button class="quick-btn" onclick="quickAddVND(100000)">100k</button>
+        <button class="quick-btn" onclick="quickAddVND(300000)">300k (腰果)</button>
+        <button class="quick-btn" onclick="quickAddVND(500000)">500k (大鈔)</button>
+        <button class="quick-btn" style="background:#fee2e2; border-color:#fca5a5; color:#b91c1c;" onclick="clearCalc()">清空</button>
+      </div>
+
+      <div class="calc-hint">
+        💡 <strong>長輩速算法</strong>：越盾去掉三個 0，再除以 8 (或乘以 1.25)，就是大約台幣金額！例如 100,000 ₫ ➔ 100 ÷ 8 ≈ NT$ 125。
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 中越即時翻譯彈窗 -->
+  <div class="modal-overlay notranslate" id="translatorModal" onclick="closeModalOnOverlay(event, 'translatorModal')" translate="no">
+    <div class="modal-sheet notranslate" onclick="event.stopPropagation()" translate="no">
+      <div class="modal-header notranslate" translate="no">
+        <div>
+          <div class="modal-title notranslate" style="color:#1d4ed8; display:flex; align-items:center; gap:6px;" translate="no">
+            <span>🗣️</span> 中越即時極速翻譯 (語音 / 文字)
+          </div>
+          <div style="font-size:0.75rem; color:#64748b;" translate="no">講中文翻越文 ‧ 支援朗讀發音</div>
+        </div>
+        <button class="modal-close-btn notranslate" onclick="toggleTranslatorModal(false)" translate="no">✕</button>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;" class="notranslate" translate="no">
+        <span style="font-size:0.8rem; font-weight:700; color:#475569;" translate="no">翻譯方向：</span>
+        <button class="lang-toggle-btn notranslate" id="langToggleBtn" onclick="toggleTranslateDirection()" translate="no">
+          🔄 <span id="transDirectionLabel" translate="no">中 ➔ 越</span>
+        </button>
+      </div>
+
+      <div class="voice-status-hint notranslate" id="voiceStatusHint" translate="no">🔴 正在聆聽中... 請說話 (說完自動翻譯)</div>
+
+      <div class="trans-input-box notranslate" translate="no">
+        <input type="text" id="transInput" class="trans-text-input notranslate" placeholder="輸入中文或按麥克風說話..." oninput="debounceTranslate()" onkeydown="if(event.key==='Enter') executeTranslation(true)" translate="no">
+        <button type="button" class="voice-btn notranslate" id="voiceBtn" onclick="toggleSpeechRecognition()" title="按一下開始說話" translate="no">🎙️</button>
+        <button type="button" class="trans-action-btn notranslate" onclick="executeTranslation(true)" translate="no">翻譯</button>
+      </div>
+
+      <div class="quick-tags notranslate" style="margin-bottom: 10px;" translate="no">
+        <span style="font-size:0.75rem; color:#64748b; align-self:center;" translate="no">常用句：</span>
+        <button class="quick-btn notranslate" onclick="quickTranslate('請問洗手間在哪裡？')" translate="no">🚻 洗手間</button>
+        <button class="quick-btn notranslate" onclick="quickTranslate('這個多少錢？')" translate="no">💰 多少錢</button>
+        <button class="quick-btn notranslate" onclick="quickTranslate('可以算便宜一點嗎？')" translate="no">🏷️ 便宜點</button>
+        <button class="quick-btn notranslate" onclick="quickTranslate('請不要放香菜。')" translate="no">🌿 不加香菜</button>
+        <button class="quick-btn notranslate" onclick="quickTranslate('請載我們到這間飯店。')" translate="no">🏨 去飯店</button>
+        <button class="quick-btn notranslate" onclick="quickTranslate('請問可以結帳買單嗎？')" translate="no">🧾 買單</button>
+      </div>
+
+      <div class="trans-result-box notranslate" id="transResultBox" translate="no">
+        <div class="trans-result-row notranslate" translate="no">
+          <span class="trans-lang-lbl lbl-zh notranslate" id="sourceLangTag" translate="no">中文</span>
+          <span id="sourceResultText" translate="no">你好，請給我菜單。</span>
+        </div>
+        <div class="trans-result-row notranslate" style="font-weight: 700; color: #1e3a8a;" translate="no">
+          <span class="trans-lang-lbl lbl-vi notranslate" id="targetLangTag" translate="no">越南文</span>
+          <span id="targetResultText" translate="no">Xin chào, vui lòng cho tôi xem thực đơn.</span>
+          <button type="button" class="speak-btn notranslate" onclick="speakTargetText()" title="朗讀發音" translate="no">🔊 發音</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 雙時區即時時鐘邏輯 (台灣 GMT+8, 越南 GMT+7)
+    function updateClocks() {
+      var now = new Date();
+      var twStr = now.toLocaleTimeString('zh-TW', { timeZone: 'Asia/Taipei', hour: '2-digit', minute: '2-digit', hour12: false });
+      var vnStr = now.toLocaleTimeString('zh-TW', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', hour12: false });
+      var twEl = document.getElementById('twClock');
+      var vnEl = document.getElementById('vnClock');
+      if (twEl) twEl.innerText = twStr;
+      if (vnEl) vnEl.innerText = vnStr;
+    }
+    setInterval(updateClocks, 1000);
+    updateClocks();
+
+    // 氣象代碼解析
+    function getWeatherDesc(code) {
+      if (code === 0) return { desc: "晴朗", icon: "☀️" };
+      if (code >= 1 && code <= 3) return { desc: "多雲晴朗", icon: "⛅" };
+      if (code >= 45 && code <= 48) return { desc: "有霧", icon: "🌫️" };
+      if (code >= 51 && code <= 67) return { desc: "局部短暫雨", icon: "🌦️" };
+      if (code >= 80 && code <= 82) return { desc: "陣雨", icon: "🌧️" };
+      if (code >= 95) return { desc: "雷陣雨", icon: "⛈️" };
+      return { desc: "晴時多雲", icon: "🌤️" };
+    }
+
+    var weatherFullData = null;
+
+    // 即時與未來逐時、每週氣象串接 (精確鎖定胡志明市時區)
+    function fetchLiveWeather(isUserRefresh) {
+      var syncTimeEl = document.getElementById('weatherLiveSyncTime');
+      if (isUserRefresh && syncTimeEl) {
+        syncTimeEl.innerText = '正在即時連線更新中...';
+      }
+
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=10.8231&longitude=106.6297&current=temperature_2m,weather_code&hourly=temperature_2m,precipitation_probability,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Asia%2FHo_Chi_Minh';
+      
+      fetch(url)
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          weatherFullData = data;
+          if (syncTimeEl) {
+            var now = new Date();
+            var timeStr = now.toLocaleTimeString('zh-TW', { timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit' });
+            syncTimeEl.innerText = '胡志明市即時同步 (' + timeStr + ' 更新)';
+          }
+          renderWeatherDetails();
+        })
+        .catch(function(err) {
+          console.warn("天氣連線離線:", err);
+          if (syncTimeEl) syncTimeEl.innerText = '離線基準預報 (1月乾季氣候宜人)';
+        });
+    }
+
+    // 彈窗背景點擊關閉
+    function closeModalOnOverlay(e, modalId) {
+      if (e.target.id === modalId) {
+        var modal = document.getElementById(modalId);
+        if (modal) modal.classList.remove('active');
+      }
+    }
+
+    // 1. 氣象詳細面板開關與動態渲染
+    function toggleWeatherModal(show) {
+      var modal = document.getElementById('weatherModal');
+      if (!modal) return;
+      if (show) {
+        modal.classList.add('active');
+        fetchLiveWeather(false);
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    // 精確渲染 24 小時水平單列滑動氣象 (修正時差偏差)
+    function renderWeatherDetails() {
+      if (!weatherFullData || !weatherFullData.hourly || !weatherFullData.daily) return;
+
+      var hourlyTrack = document.getElementById('hourlyForecastTrack');
+      var hTimes = weatherFullData.hourly.time;
+      var hTemps = weatherFullData.hourly.temperature_2m;
+      var hPops = weatherFullData.hourly.precipitation_probability;
+      var hCodes = weatherFullData.hourly.weather_code;
+
+      var now = new Date();
+      var vnFormatter = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Ho_Chi_Minh',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        hourCycle: 'h23'
+      });
+      var parts = vnFormatter.formatToParts(now);
+      var pObj = {};
+      parts.forEach(function(p){ pObj[p.type] = p.value; });
+      var currentLocalHourStr = pObj.year + '-' + pObj.month + '-' + pObj.day + 'T' + pObj.hour;
+
+      var startIdx = 0;
+      for (var i = 0; i < hTimes.length; i++) {
+        if (hTimes[i].startsWith(currentLocalHourStr) || hTimes[i] >= currentLocalHourStr) {
+          startIdx = i;
+          break;
+        }
+      }
+
+      var hourlyHtml = '';
+      for (var j = startIdx; j < startIdx + 24 && j < hTimes.length; j++) {
+        var tStr = hTimes[j].slice(11, 16);
+        var tTemp = Math.round(hTemps[j]);
+        var tPop = hPops[j] !== undefined ? hPops[j] : 0;
+        var tInfo = getWeatherDesc(hCodes[j]);
+        var isCurrentHour = (j === startIdx);
+
+        hourlyHtml += '<div class="hourly-pill' + (isCurrentHour ? ' current-active' : '') + '">' +
+          '<div class="hourly-time">' + (isCurrentHour ? '現在' : tStr) + '</div>' +
+          '<div class="hourly-icon">' + tInfo.icon + '</div>' +
+          '<div class="hourly-temp">' + tTemp + '°C</div>' +
+          '<div class="hourly-pop">💧' + tPop + '%</div>' +
+        '</div>';
+      }
+      hourlyTrack.innerHTML = hourlyHtml;
+
+      var weeklyTableBody = document.querySelector('#weeklyForecastTable tbody');
+      var dTimes = weatherFullData.daily.time;
+      var dMaxs = weatherFullData.daily.temperature_2m_max;
+      var dMins = weatherFullData.daily.temperature_2m_min;
+      var dPops = weatherFullData.daily.precipitation_probability_max;
+      var dCodes = weatherFullData.daily.weather_code;
+
+      var weekdays = ['週日', '週一', '週二', '週三', '週四', '週五', '週六'];
+      var weeklyHtml = '';
+
+      for (var k = 0; k < dTimes.length && k < 7; k++) {
+        var dateObj = new Date(dTimes[k]);
+        var dayName = (k === 0) ? '今天' : weekdays[dateObj.getDay()];
+        var dInfo = getWeatherDesc(dCodes[k]);
+        var dMax = Math.round(dMaxs[k]);
+        var dMin = Math.round(dMins[k]);
+        var dPop = dPops[k] !== undefined ? dPops[k] : 0;
+
+        weeklyHtml += '<tr>' +
+          '<td style="font-weight:700; width:65px;">' + dayName + '</td>' +
+          '<td style="width:30px; font-size:1.1rem;">' + dInfo.icon + '</td>' +
+          '<td style="color:#64748b;">' + dInfo.desc + '</td>' +
+          '<td style="color:#2563eb; font-weight:700;">💧 ' + dPop + '%</td>' +
+          '<td style="text-align:right; font-weight:700;">' + dMin + '° ~ ' + dMax + '°C</td>' +
+        '</tr>';
+      }
+      weeklyTableBody.innerHTML = weeklyHtml;
+    }
+
+    // 2. 匯率換算彈窗開關
+    function toggleCurrencyModal(show) {
+      var modal = document.getElementById('currencyModal');
+      if (!modal) return;
+      if (show) {
+        modal.classList.add('active');
+        setTimeout(function() {
+          var inputV = document.getElementById('inputVND');
+          if (inputV) inputV.focus();
+        }, 300);
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    // 3. 翻譯器彈窗開關
+    function toggleTranslatorModal(show) {
+      var modal = document.getElementById('translatorModal');
+      if (!modal) return;
+      if (show) {
+        modal.classList.add('active');
+        setTimeout(function() {
+          var inputT = document.getElementById('transInput');
+          if (inputT) inputT.focus();
+        }, 300);
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    // 4. Grab 教學彈窗開關
+    function toggleGrabModal(show) {
+      var modal = document.getElementById('grabModal');
+      if (!modal) return;
+      if (show) {
+        modal.classList.add('active');
+      } else {
+        modal.classList.remove('active');
+      }
+    }
+
+    // 天數切換核心邏輯（修復版：純粹直接設定 display，不依賴衝突的 class !important）
+    var dayList = ['day1', 'day2', 'day3', 'day4', 'day5', 'budget'];
+    var currentDay = 'day1';
+
+    function switchDay(targetId) {
+      currentDay = targetId;
+      var panels = document.querySelectorAll('.day-panel');
+      for (var i = 0; i < panels.length; i++) {
+        panels[i].style.display = 'none';
+      }
+
+      var buttons = document.querySelectorAll('.nav-tab-btn');
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove('active');
+      }
+
+      var p = document.getElementById(targetId);
+      if (p) {
+        p.style.display = 'block';
+      }
+
+      var b = document.getElementById('btn-' + targetId);
+      if (b) {
+        b.classList.add('active');
+        b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+
+    function prevDay() {
+      var idx = dayList.indexOf(currentDay);
+      if (idx > 0) {
+        switchDay(dayList[idx - 1]);
+      }
+    }
+
+    function nextDay() {
+      var idx = dayList.indexOf(currentDay);
+      if (idx < dayList.length - 1) {
+        switchDay(dayList[idx + 1]);
+      }
+    }
+
+    // 本地 0ms 極速常用詞字典
+    var localDictZhToVi = {
+      "請問洗手間在哪裡？": "Xin hỏi nhà vệ sinh ở đâu?",
+      "洗手間在哪": "Nhà vệ sinh ở đâu?",
+      "廁所在哪": "Nhà vệ sinh ở đâu?",
+      "這個多少錢？": "Cái này bao nhiêu tiền?",
+      "多少錢": "Bao nhiêu tiền?",
+      "可以算便宜一點嗎？": "Có thể giảm giá một chút không?",
+      "便宜一點": "Bớt chút được không?",
+      "請不要放香菜。": "Làm ơn đừng bỏ rau mùi (ngò rí).",
+      "不要香菜": "Không ăn rau mùi",
+      "請載我們到這間飯店。": "Xin vui lòng chở chúng tôi đến khách sạn này.",
+      "去飯店": "Đi đến khách sạn",
+      "請問可以結帳買單嗎？": "Làm ơn cho tôi tính tiền.",
+      "買單": "Tính tiền",
+      "結帳": "Tính tiền",
+      "謝謝": "Cảm ơn",
+      "你好": "Xin chào",
+      "太貴了": "Đắt quá"
+    };
+
+    var localDictViToZh = {
+      "bao nhiêu tiền": "多少錢？",
+      "nhà vệ sinh ở đâu": "洗手間在哪裡？",
+      "tính tiền": "結帳買單",
+      "cảm ơn": "謝謝",
+      "xin chào": "你好"
+    };
+
+    // 中越雙向翻譯核心邏輯
+    var transDirection = 'zh-vi';
+    var isRecording = false;
+    var recognition = null;
+    var debounceTimer = null;
+    var speechEndTimer = null;
+
+    function toggleTranslateDirection() {
+      var lbl = document.getElementById('transDirectionLabel');
+      var srcTag = document.getElementById('sourceLangTag');
+      var tgtTag = document.getElementById('targetLangTag');
+      var input = document.getElementById('transInput');
+
+      if (transDirection === 'zh-vi') {
+        transDirection = 'vi-zh';
+        lbl.innerText = '越 ➔ 中';
+        srcTag.innerText = '越南文';
+        srcTag.className = 'trans-lang-lbl lbl-vi notranslate';
+        tgtTag.innerText = '中文';
+        tgtTag.className = 'trans-lang-lbl lbl-zh notranslate';
+        input.placeholder = 'Nhập tiếng Việt hoặc nói...';
+      } else {
+        transDirection = 'zh-vi';
+        lbl.innerText = '中 ➔ 越';
+        srcTag.innerText = '中文';
+        srcTag.className = 'trans-lang-lbl lbl-zh notranslate';
+        tgtTag.innerText = '越南文';
+        tgtTag.className = 'trans-lang-lbl lbl-vi notranslate';
+        input.placeholder = '輸入中文或按麥克風說話...';
+      }
+    }
+
+    function quickTranslate(text) {
+      document.getElementById('transInput').value = text;
+      executeTranslation(true);
+    }
+
+    function debounceTranslate() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(function() {
+        executeTranslation(false);
+      }, 500);
+    }
+
+    function executeTranslation(force) {
+      var inputElem = document.getElementById('transInput');
+      var q = inputElem.value.trim();
+      if (!q) return;
+
+      document.getElementById('sourceResultText').innerText = q;
+
+      var cleanQ = q.replace(/[？?。！!\s]/g, '').toLowerCase();
+      if (transDirection === 'zh-vi') {
+        for (var key in localDictZhToVi) {
+          if (cleanQ === key.replace(/[？?。！!\s]/g, '').toLowerCase()) {
+            document.getElementById('targetResultText').innerText = localDictZhToVi[key];
+            return;
+          }
+        }
+      } else {
+        for (var vKey in localDictViToZh) {
+          if (cleanQ.indexOf(vKey.toLowerCase()) !== -1) {
+            document.getElementById('targetResultText').innerText = localDictViToZh[vKey];
+            return;
+          }
+        }
+      }
+
+      document.getElementById('targetResultText').innerText = '⚡ 翻譯中...';
+
+      var srcLang = transDirection === 'zh-vi' ? 'zh-TW' : 'vi';
+      var tgtLang = transDirection === 'zh-vi' ? 'vi' : 'zh-TW';
+
+      var googleUrl = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' + srcLang + '&tl=' + tgtLang + '&dt=t&q=' + encodeURIComponent(q);
+
+      var controller = new AbortController();
+      var timeoutId = setTimeout(function() { controller.abort(); }, 2500);
+
+      fetch(googleUrl, { signal: controller.signal })
+        .then(function(res) {
+          clearTimeout(timeoutId);
+          return res.json();
+        })
+        .then(function(data) {
+          if (data && data[0] && data[0][0] && data[0][0][0]) {
+            document.getElementById('targetResultText').innerText = data[0][0][0];
+          } else {
+            throw new Error('GTX empty');
+          }
+        })
+        .catch(function(err) {
+          var pair = transDirection === 'zh-vi' ? 'zh|vi' : 'vi|zh';
+          var memUrl = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(q) + '&langpair=' + pair;
+          fetch(memUrl)
+            .then(function(r) { return r.json(); })
+            .then(function(mdata) {
+              if (mdata && mdata.responseData && mdata.responseData.translatedText) {
+                document.getElementById('targetResultText').innerText = mdata.responseData.translatedText;
+              } else {
+                document.getElementById('targetResultText').innerText = '翻譯異常，請點擊重試。';
+              }
+            })
+            .catch(function() {
+              document.getElementById('targetResultText').innerText = '連線微弱，請手動點擊翻譯。';
+            });
+        });
+    }
+
+    function speakTargetText() {
+      var text = document.getElementById('targetResultText').innerText;
+      if (!text || text.indexOf('翻譯中') !== -1) return;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        var utter = new SpeechSynthesisUtterance(text);
+        utter.lang = transDirection === 'zh-vi' ? 'vi-VN' : 'zh-TW';
+        utter.rate = 0.95;
+        window.speechSynthesis.speak(utter);
+      } else {
+        alert('您的瀏覽器不支援語音朗讀功能。');
+      }
+    }
+
+    function toggleSpeechRecognition() {
+      var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert('此手機瀏覽器未支援即時語音辨識，請使用打字輸入或 Chrome 瀏覽器！');
+        return;
+      }
+
+      var voiceBtn = document.getElementById('voiceBtn');
+      var statusHint = document.getElementById('voiceStatusHint');
+
+      if (isRecording) {
+        if (recognition) recognition.stop();
+        isRecording = false;
+        voiceBtn.classList.remove('recording');
+        statusHint.style.display = 'none';
+        return;
+      }
+
+      recognition = new SpeechRec();
+      recognition.lang = transDirection === 'zh-vi' ? 'zh-TW' : 'vi-VN';
+      recognition.interimResults = true;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = function() {
+        isRecording = true;
+        voiceBtn.classList.add('recording');
+        statusHint.style.display = 'block';
+      };
+
+      recognition.onresult = function(event) {
+        clearTimeout(speechEndTimer);
+        var currentText = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+          currentText += event.results[i][0].transcript;
+        }
+        document.getElementById('transInput').value = currentText;
+
+        if (event.results[0].isFinal) {
+          executeTranslation(true);
+        } else {
+          speechEndTimer = setTimeout(function() {
+            executeTranslation(true);
+          }, 450);
+        }
+      };
+
+      recognition.onerror = function(event) {
+        console.warn('語音辨識事件:', event.error);
+        voiceBtn.classList.remove('recording');
+        statusHint.style.display = 'none';
+        isRecording = false;
+      };
+
+      recognition.onend = function() {
+        voiceBtn.classList.remove('recording');
+        statusHint.style.display = 'none';
+        isRecording = false;
+      };
+
+      recognition.start();
+    }
+
+    // 即時匯率核心連線與計算引擎
+    var currentLiveRate = 800;
+
+    function fetchLiveExchangeRate(isManualRefresh) {
+      var statusText = document.getElementById('statusText');
+      var rateStatus = document.getElementById('rateStatus');
+      var rateDisplay = document.getElementById('rateDisplay');
+      var statusDot = document.getElementById('statusDot');
+
+      if (isManualRefresh && statusText) {
+        statusText.innerText = '連線更新中...';
+      }
+
+      fetch('https://open.er-api.com/v6/latest/TWD')
+        .then(function(res) {
+          if (!res.ok) throw new Error('API 連線異常');
+          return res.json();
+        })
+        .then(function(data) {
+          if (data && data.rates && data.rates.VND) {
+            currentLiveRate = Math.round(data.rates.VND * 10) / 10;
+            if (rateDisplay) rateDisplay.innerText = currentLiveRate.toLocaleString();
+            if (rateStatus) rateStatus.className = 'rate-status status-live';
+            if (statusDot) statusDot.innerText = '🟢';
+            if (statusText) statusText.innerText = '已連線';
+            calcVNDtoNTD();
+          }
+        })
+        .catch(function(err) {
+          console.warn('匯率離線備援模式啟動:', err);
+          currentLiveRate = 800;
+          if (rateDisplay) rateDisplay.innerText = '800';
+          if (rateStatus) rateStatus.className = 'rate-status status-fallback';
+          if (statusDot) statusDot.innerText = '🟡';
+          if (statusText) statusText.innerText = '離線基準 (1:800)';
+        });
+    }
+
+    function calcVNDtoNTD() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (!inputV || !inputN) return;
+      var vndVal = parseFloat(inputV.value);
+      if (!isNaN(vndVal) && vndVal >= 0) {
+        inputN.value = Math.round((vndVal / currentLiveRate) * 10) / 10;
+      } else {
+        inputN.value = '';
+      }
+    }
+
+    function calcNTDtoVND() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (!inputV || !inputN) return;
+      var ntdVal = parseFloat(inputN.value);
+      if (!isNaN(ntdVal) && ntdVal >= 0) {
+        inputV.value = Math.round(ntdVal * currentLiveRate);
+      } else {
+        inputV.value = '';
+      }
+    }
+
+    function quickAddVND(amount) {
+      var inputV = document.getElementById('inputVND');
+      if (inputV) {
+        inputV.value = amount;
+        calcVNDtoNTD();
+      }
+    }
+
+    function clearCalc() {
+      var inputV = document.getElementById('inputVND');
+      var inputN = document.getElementById('inputNTD');
+      if (inputV) inputV.value = '';
+      if (inputN) inputN.value = '';
+    }
+
+    window.onload = function() {
+      switchDay('day1');
+      fetchLiveExchangeRate(false);
+      fetchLiveWeather(false);
+    };
+  </script>
+</body>
+</html>
