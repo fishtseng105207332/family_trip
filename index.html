@@ -79,21 +79,27 @@
     th { background: var(--primary-light); color: var(--primary); font-weight: 700; }
     .tip-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 8px; margin: 14px 0; font-size: 0.85rem; color: #78350f; }
 
-    /* 實際支出記帳本專屬樣式 */
+    /* 實際支出記帳本與收據圖檔樣式 */
     .expense-form-card { background: #fff; border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); border: 1.5px solid #cbd5e1; margin-bottom: 14px; }
     .form-group { margin-bottom: 12px; }
     .form-label { display: block; font-size: 0.82rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 4px; }
     .form-input { width: 100%; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.92rem; outline: none; background: #fafafa; }
     .form-input:focus { border-color: var(--primary); background: #fff; }
-    .member-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
-    .chip-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+    .member-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+    .chip-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 4px 10px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; cursor: pointer; }
     .chip-btn:active { background: var(--primary); color: #fff; }
     .currency-select { padding: 10px 8px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem; font-weight: 800; background: #f0fdfa; color: var(--primary); outline: none; }
+    .photo-upload-box { border: 1.5px dashed #94a3b8; border-radius: 10px; padding: 10px 12px; background: #f8fafc; text-align: center; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.84rem; font-weight: 700; color: #334155; }
+    .photo-upload-box:active { background: #e2e8f0; }
+    .photo-preview-wrap { margin-top: 8px; display: none; align-items: center; gap: 10px; background: #f0fdf4; padding: 8px 10px; border-radius: 8px; border: 1px solid #bbf7d0; }
+    .photo-preview-thumb { width: 56px; height: 56px; object-fit: cover; border-radius: 6px; border: 1px solid #86efac; }
     .btn-submit-exp { width: 100%; background: linear-gradient(135deg, #134e4a, #0f766e); color: #fff; border: none; padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 10px rgba(19,78,74,0.25); }
     .exp-stats-bar { background: linear-gradient(135deg, #09332f, #134e4a); color: #fff; border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .exp-record-card { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); border-left: 4px solid #0d9488; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
     .exp-tag-pill { display: inline-block; background: #f1f5f9; color: #334155; padding: 2px 8px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; margin-right: 4px; margin-top: 4px; }
     .exp-del-btn { background: #fee2e2; color: #b91c1c; border: none; padding: 5px 9px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+    .receipt-thumb-btn { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; padding: 4px 8px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; cursor: pointer; }
+    .receipt-thumb-img { width: 32px; height: 32px; object-fit: cover; border-radius: 4px; }
 
     /* 懸浮按鈕與彈窗 */
     .fab-container { position: fixed; bottom: 20px; right: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 10000; }
@@ -103,7 +109,7 @@
     .fab-grab { background: linear-gradient(135deg, #00b14f, #059669); }
     .fab-calc { background: linear-gradient(135deg, #15803d, #16a34a); }
     .fab-trans { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.6); z-index: 20000; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.65); z-index: 20000; align-items: flex-end; justify-content: center; backdrop-filter: blur(4px); }
     .modal-overlay.active { display: flex; }
     .modal-sheet { background: #fff; width: 100%; max-width: 600px; max-height: 85vh; border-radius: 24px 24px 0 0; padding: 20px 18px 28px; overflow-y: auto; animation: slideUp 0.22s ease-out; }
     @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -146,6 +152,17 @@
     <button class="fab-btn fab-grab" onclick="toggleGrabModal(true)"><span>🚗</span>Grab</button>
     <button class="fab-btn fab-calc" onclick="toggleCurrencyModal(true)"><span>💱</span>換算</button>
     <button class="fab-btn fab-trans" onclick="toggleTranslatorModal(true)"><span>🗣️</span>翻譯</button>
+  </div>
+
+  <!-- 收據圖片放大檢視彈窗 -->
+  <div class="modal-overlay" id="photoViewerModal" onclick="closeModalOnOverlay(event, 'photoViewerModal')" style="align-items:center; padding:16px;">
+    <div style="background:#fff; border-radius:16px; max-width:500px; width:100%; padding:14px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.4);" onclick="event.stopPropagation()">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <span style="font-weight:800; font-size:0.95rem; color:var(--primary-dark);" id="photoViewerTitle">📷 消費明細／收據圖檔</span>
+        <button class="modal-close-btn" onclick="document.getElementById('photoViewerModal').classList.remove('active')">✕</button>
+      </div>
+      <img id="photoViewerImg" src="" alt="明細圖片" style="max-width:100%; max-height:72vh; border-radius:10px; object-fit:contain; border:1px solid #e2e8f0;">
+    </div>
   </div>
 
   <!-- 1. 氣象詳細面板彈窗 -->
@@ -323,7 +340,7 @@
     <!-- 動態生成 Day 1 ~ Day 5 的容器 -->
     <div id="itineraryRoot"></div>
 
-    <!-- BUDGET PANEL (已更新為 Agoda 未稅3,000 + 15%稅費 = 3,450/晚) -->
+    <!-- BUDGET PANEL -->
     <div id="budget" class="day-panel">
       <div class="day-header">
         <h2>💰 全團 8 人預算總彙整 (星宇最終旗艦版)</h2>
@@ -351,20 +368,19 @@
       </div>
     </div>
 
-    <!-- EXPENSE PANEL (新增：實際支出與代墊記帳本) -->
+    <!-- EXPENSE PANEL (實際支出與代墊記帳本 + 專屬人名 + 收據拍照上傳) -->
     <div id="expense" class="day-panel">
       <div class="day-header">
-        <h2>📝 實際支出與代墊記帳本 (自動保存在手機)</h2>
-        <div class="day-meta">支援多人支付、多人代墊 ｜ 越盾/台幣雙幣自動換算 ｜ 一鍵複製 LINE 報表</div>
+        <h2>📝 實際支出與代墊記帳本 (含收據拍照存檔)</h2>
+        <div class="day-meta">專屬成員一鍵點選 ｜ 支援拍攝/上傳收據明細 ｜ 越盾/台幣自動換算</div>
       </div>
 
-      <!-- 記帳輸入表單 -->
       <div class="expense-form-card">
         <div class="form-group">
           <label class="form-label">1. 支付項目名稱：</label>
           <input type="text" id="expItemName" class="form-input" placeholder="例如：錦麗河粉午餐、Grab車資、腰果伴手禮...">
           <div class="member-chips">
-            <span style="font-size:0.72rem; color:#64748b; align-self:center;">快選項目：</span>
+            <span style="font-size:0.72rem; color:#64748b; align-self:center;">快選：</span>
             <button type="button" class="chip-btn" onclick="setExpItem('🚗 Grab 車資')">🚗 Grab</button>
             <button type="button" class="chip-btn" onclick="setExpItem('🍜 餐飲美食')">🍜 餐飲</button>
             <button type="button" class="chip-btn" onclick="setExpItem('💆 洗頭足浴 SPA')">💆 SPA</button>
@@ -374,32 +390,36 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">2. 支付人員名字 (誰先掏錢付帳，可輸入多人)：</label>
-          <input type="text" id="expPayers" class="form-input" placeholder="可輸入多人，用逗號或空白分隔 (如：Oscar, 爸爸)">
+          <label class="form-label">2. 支付人員名字 (誰先掏錢付帳，可點選多人)：</label>
+          <input type="text" id="expPayers" class="form-input" placeholder="點選下方姓名或自行輸入 (多人用逗號分隔)">
           <div class="member-chips">
             <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
             <button type="button" class="chip-btn" onclick="appendName('expPayers', 'Oscar')">+ Oscar</button>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', '爸爸')">+ 爸爸</button>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', '媽媽')">+ 媽媽</button>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', '長輩A')">+ 長輩A</button>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', '長輩B')">+ 長輩B</button>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', '親友A')">+ 親友A</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '世霖')">+ 世霖</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '佳平')">+ 佳平</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '佳瑜')">+ 佳瑜</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '義君')">+ 義君</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '秀洪')">+ 秀洪</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '秀清')">+ 秀清</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '傳和')">+ 傳和</button>
             <button type="button" class="chip-btn" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" onclick="document.getElementById('expPayers').value=''">清空</button>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">3. 幫代墊人員 (這筆錢是幫誰付的，可輸入多人)：</label>
-          <input type="text" id="expForWhom" class="form-input" placeholder="可輸入多人 (如：全團8人、媽媽, 阿姨...)">
+          <label class="form-label">3. 幫代墊人員 (這筆錢是幫誰付的，可點選多人)：</label>
+          <input type="text" id="expForWhom" class="form-input" placeholder="點選下方姓名或自行輸入 (如：全團8人、世霖, 佳平...)">
           <div class="member-chips">
             <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '全團8人')">+ 全團8人</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '4位長輩')">+ 4位長輩</button>
+            <button type="button" class="chip-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="appendName('expForWhom', '全團8人')">+ 全團8人</button>
             <button type="button" class="chip-btn" onclick="appendName('expForWhom', 'Oscar')">+ Oscar</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '爸爸')">+ 爸爸</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '媽媽')">+ 媽媽</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '長輩A')">+ 長輩A</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '長輩B')">+ 長輩B</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '世霖')">+ 世霖</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '佳平')">+ 佳平</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '佳瑜')">+ 佳瑜</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '義君')">+ 義君</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '秀洪')">+ 秀洪</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '秀清')">+ 秀清</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '傳和')">+ 傳和</button>
             <button type="button" class="chip-btn" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" onclick="document.getElementById('expForWhom').value=''">清空</button>
           </div>
         </div>
@@ -415,6 +435,19 @@
           </div>
           <div id="expConvertPreview" style="font-size:0.78rem; color:#15803d; font-weight:700; margin-top:6px;">
             💡 輸入金額後將自動顯示折合台幣 / 越盾
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">5. 上傳消費明細／收據圖檔 (選填，自動輕量壓縮存檔)：</label>
+          <input type="file" id="expPhotoInput" accept="image/*" style="display:none;" onchange="handleReceiptPhoto(event)">
+          <div class="photo-upload-box" onclick="document.getElementById('expPhotoInput').click()">
+            <span>📷 點此拍照或從相簿選擇收據明細圖檔</span>
+          </div>
+          <div class="photo-preview-wrap" id="expPhotoPreviewWrap">
+            <img id="expPhotoPreviewImg" class="photo-preview-thumb" src="" alt="預覽">
+            <div style="flex:1; font-size:0.78rem; color:#166534; font-weight:700;">✅ 明細照片已壓縮準備就緒！</div>
+            <button type="button" class="exp-del-btn" onclick="clearPendingPhoto()">移除照片</button>
           </div>
         </div>
 
@@ -1029,7 +1062,7 @@
     }
 
     // ==========================================
-    // 3. 彈窗與天數導航控制 (新增 expense 分頁)
+    // 3. 彈窗與天數導航控制
     // ==========================================
     function closeModalOnOverlay(e, modalId) {
       if (e.target.id === modalId) {
@@ -1312,10 +1345,11 @@
     function clearCalc() { document.getElementById('inputVND').value = ''; document.getElementById('inputNTD').value = ''; }
 
     // ==========================================
-    // 6. 新增：實際支出與代墊記帳系統 (LocalStorage 持久化)
+    // 6. 實際支出記帳系統 + 智慧收據照片壓縮
     // ==========================================
-    var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_v1';
+    var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_v2';
     var expenseList = [];
+    var pendingPhotoDataUrl = null;
 
     function loadExpenses() {
       try {
@@ -1330,7 +1364,9 @@
     function saveExpenses() {
       try {
         localStorage.setItem(STORAGE_KEY_EXP, JSON.stringify(expenseList));
-      } catch (e) {}
+      } catch (e) {
+        alert('手機瀏覽器儲存空間已滿！請先刪除幾筆舊照片紀錄，或複製報表備份後清空。');
+      }
       renderExpenses();
     }
 
@@ -1340,6 +1376,10 @@
 
     function appendName(inputId, name) {
       var el = document.getElementById(inputId);
+      if (name === '全團8人') {
+        el.value = 'Oscar, 世霖, 佳平, 佳瑜, 義君, 秀洪, 秀清, 傳和';
+        return;
+      }
       var current = el.value.trim();
       if (!current) {
         el.value = name;
@@ -1368,6 +1408,52 @@
       }
     }
 
+    // Canvas 智慧縮圖壓縮 (限制最大邊 800px，JPEG 品質 0.65，確保單張僅 ~40KB 不爆 LocalStorage)
+    function handleReceiptPhoto(event) {
+      var file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+          var maxDim = 800;
+          var w = img.width;
+          var h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+            else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = w;
+          canvas.height = h;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+          pendingPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.65);
+
+          document.getElementById('expPhotoPreviewImg').src = pendingPhotoDataUrl;
+          document.getElementById('expPhotoPreviewWrap').style.display = 'flex';
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function clearPendingPhoto() {
+      pendingPhotoDataUrl = null;
+      document.getElementById('expPhotoInput').value = '';
+      document.getElementById('expPhotoPreviewWrap').style.display = 'none';
+      document.getElementById('expPhotoPreviewImg').src = '';
+    }
+
+    function viewReceiptPhoto(id) {
+      var rec = expenseList.find(function(r) { return r.id === id; });
+      if (!rec || !rec.photo) return;
+      document.getElementById('photoViewerTitle').innerText = '📷 ' + rec.item + ' (' + rec.time + ')';
+      document.getElementById('photoViewerImg').src = rec.photo;
+      document.getElementById('photoViewerModal').classList.add('active');
+    }
+
     function addExpenseRecord() {
       var itemName = document.getElementById('expItemName').value.trim();
       var payers = document.getElementById('expPayers').value.trim();
@@ -1376,8 +1462,8 @@
       var amt = parseFloat(document.getElementById('expAmount').value);
 
       if (!itemName) { alert('請輸入「1. 支付項目名稱」！'); return; }
-      if (!payers) { alert('請輸入「2. 支付人員名字」！'); return; }
-      if (!forWhom) { alert('請輸入「3. 幫代墊人員」！'); return; }
+      if (!payers) { alert('請選擇或輸入「2. 支付人員名字」！'); return; }
+      if (!forWhom) { alert('請選擇或輸入「3. 幫代墊人員」！'); return; }
       if (isNaN(amt) || amt <= 0) { alert('請輸入有效的「4. 幫代墊金額」！'); return; }
 
       var amtVND = cur === 'VND' ? Math.round(amt) : Math.round(amt * currentLiveRate);
@@ -1395,11 +1481,13 @@
         forWhom: forWhom,
         origCur: cur,
         amtVND: amtVND,
-        amtNTD: amtNTD
+        amtNTD: amtNTD,
+        photo: pendingPhotoDataUrl || null
       });
 
       document.getElementById('expItemName').value = '';
       document.getElementById('expAmount').value = '';
+      clearPendingPhoto();
       updateExpPreview();
       saveExpenses();
     }
@@ -1446,7 +1534,6 @@
       totalNTDEl.innerText = sumNTD.toLocaleString();
       totalVNDEl.innerText = sumVND.toLocaleString();
 
-      // 渲染各支付人先付累計
       var pKeys = Object.keys(payerStats);
       if (pKeys.length > 0) {
         payerBox.style.display = 'block';
@@ -1466,6 +1553,13 @@
 
       var html = '';
       expenseList.forEach(function(r) {
+        var photoBtnHtml = '';
+        if (r.photo) {
+          photoBtnHtml = '<div><button type="button" class="receipt-thumb-btn" onclick="viewReceiptPhoto(' + r.id + ')">' +
+            '<img src="' + r.photo + '" class="receipt-thumb-img" alt="收據">' +
+            '<span>🔍 點此放大查看收據明細</span></button></div>';
+        }
+
         html += '<div class="exp-record-card">' +
           '<div style="flex:1;">' +
             '<div style="font-size:0.72rem; color:#64748b; font-weight:700;">🕒 ' + r.time + '</div>' +
@@ -1474,6 +1568,7 @@
               '<span class="exp-tag-pill">💳 支付人：<strong>' + r.payers + '</strong></span>' +
               '<span class="exp-tag-pill" style="background:#fff7ed; color:#9a3412;">🤝 幫代墊：<strong>' + r.forWhom + '</strong></span>' +
             '</div>' +
+            photoBtnHtml +
           '</div>' +
           '<div style="text-align:right; flex-shrink:0;">' +
             '<div style="font-size:1.05rem; font-weight:800; color:#15803d;">NT$ ' + r.amtNTD.toLocaleString() + '</div>' +
@@ -1496,7 +1591,7 @@
       expenseList.forEach(function(r, idx) {
         totalN += r.amtNTD;
         totalV += r.amtVND;
-        lines.push((idx + 1) + '. [' + r.time + '] ' + r.item);
+        lines.push((idx + 1) + '. [' + r.time + '] ' + r.item + (r.photo ? ' (📷附收據照片)' : ''));
         lines.push('   • 支付人：' + r.payers + ' ｜ 幫代墊：' + r.forWhom);
         lines.push('   • 金額：NT$ ' + r.amtNTD.toLocaleString() + ' (' + r.amtVND.toLocaleString() + ' ₫)');
       });
