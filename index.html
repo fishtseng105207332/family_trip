@@ -394,7 +394,6 @@
           <input type="text" id="expPayers" class="form-input" placeholder="點選下方姓名或自行輸入 (多人用逗號分隔)">
           <div class="member-chips">
             <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
-            <button type="button" class="chip-btn" onclick="appendName('expPayers', 'Oscar')">+ Oscar</button>
             <button type="button" class="chip-btn" onclick="appendName('expPayers', '世霖')">+ 世霖</button>
             <button type="button" class="chip-btn" onclick="appendName('expPayers', '佳平')">+ 佳平</button>
             <button type="button" class="chip-btn" onclick="appendName('expPayers', '佳瑜')">+ 佳瑜</button>
@@ -408,11 +407,10 @@
 
         <div class="form-group">
           <label class="form-label">3. 幫代墊人員 (這筆錢是幫誰付的，可點選多人)：</label>
-          <input type="text" id="expForWhom" class="form-input" placeholder="點選下方姓名或自行輸入 (如：全團8人、世霖, 佳平...)">
+          <input type="text" id="expForWhom" class="form-input" placeholder="點選下方姓名或自行輸入 (如：全團7人、世霖, 佳平...)">
           <div class="member-chips">
             <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
-            <button type="button" class="chip-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="appendName('expForWhom', '全團8人')">+ 全團8人</button>
-            <button type="button" class="chip-btn" onclick="appendName('expForWhom', 'Oscar')">+ Oscar</button>
+            <button type="button" class="chip-btn" style="background:#dcfce7; color:#166534; border-color:#86efac;" onclick="appendName('expForWhom', '全團7人')">+ 全團7人</button>
             <button type="button" class="chip-btn" onclick="appendName('expForWhom', '世霖')">+ 世霖</button>
             <button type="button" class="chip-btn" onclick="appendName('expForWhom', '佳平')">+ 佳平</button>
             <button type="button" class="chip-btn" onclick="appendName('expForWhom', '佳瑜')">+ 佳瑜</button>
@@ -1376,8 +1374,8 @@
 
     function appendName(inputId, name) {
       var el = document.getElementById(inputId);
-      if (name === '全團8人') {
-        el.value = 'Oscar, 世霖, 佳平, 佳瑜, 義君, 秀洪, 秀清, 傳和';
+      if (name === '全團7人') {
+        el.value = '世霖, 佳平, 佳瑜, 義君, 秀洪, 秀清, 傳和';
         return;
       }
       var current = el.value.trim();
