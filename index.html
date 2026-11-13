@@ -1,3 +1,31 @@
+已為您在手冊的頂部導航列新增了一個專屬的 **「📝 實際記帳」** 分頁（位於 `💰 預算總覽` 旁邊），並整合進單一 `index.html` 檔案中。
+
+### 新增「實際支出記帳本」功能亮點：
+
+1. **完整對應您的 4 大需求欄位**：
+* **支付項目名稱**：例如「錦麗河粉午餐」、「Grab車資」、「伴手禮腰果」。
+* **支付人員名字（可多人）**：實際先掏錢付帳的人，可用空白或逗號分隔多人（例如：`Oscar, 爸爸`）。
+* **幫代墊人員（可多人）**：這筆錢是幫誰代墊的，可用空白或逗號分隔（例如：`媽媽, 叔叔, 阿姨` 或 `全團8人`）。
+* **幫代墊金額（支援越盾 VND / 台幣 NTD 雙幣別切換）**：輸入越南盾時，系統會**自動依照當前連線匯率換算成台幣**並同時記錄；輸入台幣也會自動反推越盾。
+
+
+2. **成員名單一鍵帶入（免重複打字）**：
+* 內建常用成員快捷按鈕（可自行點擊帶入姓名，也支援直接打字輸入），在手機上操作極快。
+
+
+3. **手機自動存檔（LocalStorage 永久保存）**：
+* 關閉網頁或重新整理**資料絕不消失**。
+* 附帶 **「📊 自動統計總花費」**、單筆刪除，以及 **「📋 一鍵複製 LINE 對帳文字報表」** 功能，回台灣後直接貼到家庭群組就能輕鬆算帳！
+
+
+
+---
+
+### 完整單一檔案 `index.html`（含最新含稅預算＋實際記帳分頁）
+
+請直接複製以下完整程式碼，覆蓋 GitHub 上的 `index.html`：
+
+```html
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -78,6 +106,22 @@
     th, td { padding: 10px 12px; border-bottom: 1px solid var(--gray-200); }
     th { background: var(--primary-light); color: var(--primary); font-weight: 700; }
     .tip-box { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 8px; margin: 14px 0; font-size: 0.85rem; color: #78350f; }
+
+    /* 實際支出記帳本專屬樣式 */
+    .expense-form-card { background: #fff; border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); border: 1.5px solid #cbd5e1; margin-bottom: 14px; }
+    .form-group { margin-bottom: 12px; }
+    .form-label { display: block; font-size: 0.82rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 4px; }
+    .form-input { width: 100%; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.92rem; outline: none; background: #fafafa; }
+    .form-input:focus { border-color: var(--primary); background: #fff; }
+    .member-chips { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+    .chip-btn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 3px 9px; border-radius: 999px; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+    .chip-btn:active { background: var(--primary); color: #fff; }
+    .currency-select { padding: 10px 8px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem; font-weight: 800; background: #f0fdfa; color: var(--primary); outline: none; }
+    .btn-submit-exp { width: 100%; background: linear-gradient(135deg, #134e4a, #0f766e); color: #fff; border: none; padding: 12px; border-radius: 10px; font-size: 0.95rem; font-weight: 800; cursor: pointer; box-shadow: 0 4px 10px rgba(19,78,74,0.25); }
+    .exp-stats-bar { background: linear-gradient(135deg, #09332f, #134e4a); color: #fff; border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .exp-record-card { background: #fff; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow); border-left: 4px solid #0d9488; display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .exp-tag-pill { display: inline-block; background: #f1f5f9; color: #334155; padding: 2px 8px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; margin-right: 4px; margin-top: 4px; }
+    .exp-del-btn { background: #fee2e2; color: #b91c1c; border: none; padding: 5px 9px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
 
     /* 懸浮按鈕與彈窗 */
     .fab-container { position: fixed; bottom: 20px; right: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 10000; }
@@ -211,7 +255,7 @@
     </div>
   </div>
 
-  <!-- 4. 中越即時翻譯彈窗 (單句全新實例模式，解決第2句沒反應問題) -->
+  <!-- 4. 中越即時翻譯彈窗 -->
   <div class="modal-overlay notranslate" id="translatorModal" onclick="closeModalOnOverlay(event, 'translatorModal')" translate="no">
     <div class="modal-sheet notranslate" onclick="event.stopPropagation()" translate="no">
       <div class="modal-header notranslate" translate="no">
@@ -257,7 +301,7 @@
   <header>
     <span class="badge">🌴 8位大人 (含4位長者) ‧ 星宇最終旗艦版</span>
     <h1>胡志明市 5天4夜 孝親自由行手冊</h1>
-    <p>每天 08:00 啟程 ‧ 全期 2 台 Grab 大車 ‧ 雙時區 ‧ 常駐口訣安全手冊 ‧ 2次足浴洗頭</p>
+    <p>每天 08:00 啟程 ‧ 全期 2 台 Grab 大車 ‧ 雙時區 ‧ 常駐口訣安全手冊 ‧ 實際支出記帳</p>
     <div class="flight-pill">
       <div>✈️ <strong>去程 (1/21)：星宇航空 JX711</strong> 07:40 TPE ➔ 10:30 SGN (請於 05:40 抵達桃機 T2 報到)</div>
       <div>✈️ <strong>回程 (1/25)：星宇航空 JX714</strong> 18:00 SGN ➔ 22:20 TPE (玩到 14:15 叫 Grab 送機)</div>
@@ -298,6 +342,7 @@
           <button type="button" class="nav-tab-btn" id="btn-day4" onclick="switchDay('day4')">Day 4 (1/24)</button>
           <button type="button" class="nav-tab-btn" id="btn-day5" onclick="switchDay('day5')">Day 5 (1/25)</button>
           <button type="button" class="nav-tab-btn" id="btn-budget" onclick="switchDay('budget')">💰 預算總覽</button>
+          <button type="button" class="nav-tab-btn" id="btn-expense" onclick="switchDay('expense')">📝 實際記帳</button>
         </div>
         <button type="button" class="arrow-btn" onclick="nextDay()">▶</button>
       </div>
@@ -306,8 +351,7 @@
     <!-- 動態生成 Day 1 ~ Day 5 的容器 -->
     <div id="itineraryRoot"></div>
 
-    <!-- BUDGET PANEL -->
-<!-- BUDGET PANEL -->
+    <!-- BUDGET PANEL (已更新為 Agoda 未稅3,000 + 15%稅費 = 3,450/晚) -->
     <div id="budget" class="day-panel">
       <div class="day-header">
         <h2>💰 全團 8 人預算總彙整 (星宇最終旗艦版)</h2>
@@ -335,9 +379,105 @@
       </div>
     </div>
 
+    <!-- EXPENSE PANEL (新增：實際支出與代墊記帳本) -->
+    <div id="expense" class="day-panel">
+      <div class="day-header">
+        <h2>📝 實際支出與代墊記帳本 (自動保存在手機)</h2>
+        <div class="day-meta">支援多人支付、多人代墊 ｜ 越盾/台幣雙幣自動換算 ｜ 一鍵複製 LINE 報表</div>
+      </div>
+
+      <!-- 記帳輸入表單 -->
+      <div class="expense-form-card">
+        <div class="form-group">
+          <label class="form-label">1. 支付項目名稱：</label>
+          <input type="text" id="expItemName" class="form-input" placeholder="例如：錦麗河粉午餐、Grab車資、腰果伴手禮...">
+          <div class="member-chips">
+            <span style="font-size:0.72rem; color:#64748b; align-self:center;">快選項目：</span>
+            <button type="button" class="chip-btn" onclick="setExpItem('🚗 Grab 車資')">🚗 Grab</button>
+            <button type="button" class="chip-btn" onclick="setExpItem('🍜 餐飲美食')">🍜 餐飲</button>
+            <button type="button" class="chip-btn" onclick="setExpItem('💆 洗頭足浴 SPA')">💆 SPA</button>
+            <button type="button" class="chip-btn" onclick="setExpItem('🥜 伴手禮採買')">🥜 伴手禮</button>
+            <button type="button" class="chip-btn" onclick="setExpItem('🛒 超市水果零食')">🛒 超市</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">2. 支付人員名字 (誰先掏錢付帳，可輸入多人)：</label>
+          <input type="text" id="expPayers" class="form-input" placeholder="可輸入多人，用逗號或空白分隔 (如：Oscar, 爸爸)">
+          <div class="member-chips">
+            <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', 'Oscar')">+ Oscar</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '爸爸')">+ 爸爸</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '媽媽')">+ 媽媽</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '長輩A')">+ 長輩A</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '長輩B')">+ 長輩B</button>
+            <button type="button" class="chip-btn" onclick="appendName('expPayers', '親友A')">+ 親友A</button>
+            <button type="button" class="chip-btn" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" onclick="document.getElementById('expPayers').value=''">清空</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">3. 幫代墊人員 (這筆錢是幫誰付的，可輸入多人)：</label>
+          <input type="text" id="expForWhom" class="form-input" placeholder="可輸入多人 (如：全團8人、媽媽, 阿姨...)">
+          <div class="member-chips">
+            <span style="font-size:0.72rem; color:#64748b; align-self:center;">點選加入：</span>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '全團8人')">+ 全團8人</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '4位長輩')">+ 4位長輩</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', 'Oscar')">+ Oscar</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '爸爸')">+ 爸爸</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '媽媽')">+ 媽媽</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '長輩A')">+ 長輩A</button>
+            <button type="button" class="chip-btn" onclick="appendName('expForWhom', '長輩B')">+ 長輩B</button>
+            <button type="button" class="chip-btn" style="background:#fee2e2; color:#b91c1c; border-color:#fca5a5;" onclick="document.getElementById('expForWhom').value=''">清空</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">4. 幫代墊金額 (支援越盾 VND / 台幣 NTD 自動雙向折算)：</label>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <select id="expCurrency" class="currency-select" onchange="updateExpPreview()">
+              <option value="VND">🇻🇳 越盾 (VND)</option>
+              <option value="NTD">🇹🇼 台幣 (NTD)</option>
+            </select>
+            <input type="number" id="expAmount" class="form-input" placeholder="輸入金額 (如: 350000)" oninput="updateExpPreview()">
+          </div>
+          <div id="expConvertPreview" style="font-size:0.78rem; color:#15803d; font-weight:700; margin-top:6px;">
+            💡 輸入金額後將自動顯示折合台幣 / 越盾
+          </div>
+        </div>
+
+        <button type="button" class="btn-submit-exp" onclick="addExpenseRecord()">➕ 新增這筆支出紀錄</button>
+      </div>
+
+      <!-- 總計看板與匯出工具 -->
+      <div class="exp-stats-bar">
+        <div>
+          <div style="font-size:0.76rem; color:#ccfbf1;">📊 累計實際總支出 (共 <span id="expCount">0</span> 筆)</div>
+          <div style="font-size:1.2rem; font-weight:800; color:#fef08a;">
+            NT$ <span id="expTotalNTD">0</span>
+            <span style="font-size:0.82rem; color:#fff; font-weight:600; margin-left:6px;">(約 <span id="expTotalVND">0</span> ₫)</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <button type="button" onclick="exportExpensesToClipboard()" style="background:#fef08a; color:#042f2e; border:none; padding:8px 12px; border-radius:8px; font-size:0.78rem; font-weight:800; cursor:pointer;">📋 複製 LINE 報表</button>
+          <button type="button" onclick="clearAllExpenses()" style="background:rgba(255,255,255,0.18); color:#fff; border:1px solid rgba(255,255,255,0.35); padding:8px 10px; border-radius:8px; font-size:0.75rem; cursor:pointer;">🗑️ 清空</button>
+        </div>
+      </div>
+
+      <!-- 支付人員代墊總額統計表 -->
+      <div class="summary-card" id="payerSummaryBox" style="margin-bottom:14px; display:none;">
+        <h3>💳 各支付人員累計先付/代墊總計</h3>
+        <div id="payerSummaryList"></div>
+      </div>
+
+      <!-- 歷史明細列表 -->
+      <div id="expenseListContainer"></div>
+    </div>
+  </div>
+
   <script>
     // ==========================================
-    // 1. 行程資料庫 (Data-Driven 架構，極致精簡不重複)
+    // 1. 行程資料庫 (Data-Driven 架構)
     // ==========================================
     var itineraryData = [
       {
@@ -777,7 +917,6 @@
       }
     ];
 
-    // 動態渲染 Day 1 ~ Day 5 DOM
     function buildItineraryDOM() {
       var root = document.getElementById('itineraryRoot');
       var html = '';
@@ -918,7 +1057,7 @@
     }
 
     // ==========================================
-    // 3. 彈窗與天數導航控制
+    // 3. 彈窗與天數導航控制 (新增 expense 分頁)
     // ==========================================
     function closeModalOnOverlay(e, modalId) {
       if (e.target.id === modalId) {
@@ -944,7 +1083,7 @@
       else { stopSpeechRecognition(); m.classList.remove('active'); }
     }
 
-    var dayList = ['day1', 'day2', 'day3', 'day4', 'day5', 'budget'];
+    var dayList = ['day1', 'day2', 'day3', 'day4', 'day5', 'budget', 'expense'];
     var currentDay = 'day1';
     function switchDay(targetId) {
       currentDay = targetId;
@@ -959,7 +1098,7 @@
     function nextDay() { var i = dayList.indexOf(currentDay); if (i < dayList.length - 1) switchDay(dayList[i + 1]); }
 
     // ==========================================
-    // 4. 關鍵修復：中越即時翻譯與「單句全新實例」語音引擎
+    // 4. 中越即時翻譯與「單句全新實例」語音引擎
     // ==========================================
     var localDictZhToVi = {
       "請問洗手間在哪裡": "Xin hỏi nhà vệ sinh ở đâu?", "洗手間在哪": "Nhà vệ sinh ở đâu?", "廁所在哪": "Nhà vệ sinh ở đâu?",
@@ -1025,7 +1164,6 @@
       document.getElementById('targetResultText').innerText = '⚡ 翻譯中...';
       var sl = transDirection === 'zh-vi' ? 'zh-TW' : 'vi';
       var tl = transDirection === 'zh-vi' ? 'vi' : 'zh-TW';
-      // 加上時間戳 t=... 徹底避免瀏覽器快取卡住第2句之後的請求
       var googleUrl = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' + sl + '&tl=' + tl + '&dt=t&t=' + Date.now() + '&q=' + encodeURIComponent(q);
 
       fetch(googleUrl)
@@ -1073,7 +1211,6 @@
       window.speechSynthesis.speak(utter);
     }
 
-    // 每次點擊 🎙️ 都銷毀舊實例並建立全新單句實例，徹底解決第2句沒反應
     function toggleSpeechRecognition() {
       if (isRecording) {
         stopSpeechRecognition();
@@ -1089,14 +1226,12 @@
         return;
       }
 
-      // 1. 徹底清除前一次殘留的實例與計時器
       stopSpeechRecognition();
       var inputEl = document.getElementById('transInput');
       inputEl.value = '';
 
       try {
         recognition = new SpeechRec();
-        // 關鍵：設為 false (單句模式)，避免手機瀏覽器在 continuous 模式下第2句卡死
         recognition.continuous = false;
         recognition.interimResults = true;
         recognition.maxAlternatives = 1;
@@ -1127,7 +1262,6 @@
               executeTranslation(true);
               stopSpeechRecognition();
             } else {
-              // 若停頓超過 500ms 自動判定說完並執行翻譯
               speechEndTimer = setTimeout(function() {
                 executeTranslation(true);
                 stopSpeechRecognition();
@@ -1186,6 +1320,7 @@
             document.getElementById('rateDisplay').innerText = currentLiveRate.toLocaleString();
             if (st) st.innerText = '🟢 已連線';
             calcVNDtoNTD();
+            updateExpPreview();
           }
         })
         .catch(function() {
@@ -1204,9 +1339,212 @@
     function quickAddVND(a) { document.getElementById('inputVND').value = a; calcVNDtoNTD(); }
     function clearCalc() { document.getElementById('inputVND').value = ''; document.getElementById('inputNTD').value = ''; }
 
+    // ==========================================
+    // 6. 新增：實際支出與代墊記帳系統 (LocalStorage 持久化)
+    // ==========================================
+    var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_v1';
+    var expenseList = [];
+
+    function loadExpenses() {
+      try {
+        var saved = localStorage.getItem(STORAGE_KEY_EXP);
+        if (saved) expenseList = JSON.parse(saved);
+      } catch (e) {
+        expenseList = [];
+      }
+      renderExpenses();
+    }
+
+    function saveExpenses() {
+      try {
+        localStorage.setItem(STORAGE_KEY_EXP, JSON.stringify(expenseList));
+      } catch (e) {}
+      renderExpenses();
+    }
+
+    function setExpItem(name) {
+      document.getElementById('expItemName').value = name;
+    }
+
+    function appendName(inputId, name) {
+      var el = document.getElementById(inputId);
+      var current = el.value.trim();
+      if (!current) {
+        el.value = name;
+      } else {
+        var parts = current.split(/[,，、\s]+/);
+        if (parts.indexOf(name) === -1) {
+          el.value = current + ', ' + name;
+        }
+      }
+    }
+
+    function updateExpPreview() {
+      var cur = document.getElementById('expCurrency').value;
+      var amt = parseFloat(document.getElementById('expAmount').value);
+      var prev = document.getElementById('expConvertPreview');
+      if (isNaN(amt) || amt <= 0) {
+        prev.innerText = '💡 輸入金額後將自動顯示折合台幣 / 越盾';
+        return;
+      }
+      if (cur === 'VND') {
+        var ntd = Math.round(amt / currentLiveRate);
+        prev.innerText = '💱 折合新台幣約：NT$ ' + ntd.toLocaleString() + ' (以匯率 1:' + currentLiveRate + ' 計算)';
+      } else {
+        var vnd = Math.round(amt * currentLiveRate);
+        prev.innerText = '💱 折合越南盾約：' + vnd.toLocaleString() + ' ₫ (以匯率 1:' + currentLiveRate + ' 計算)';
+      }
+    }
+
+    function addExpenseRecord() {
+      var itemName = document.getElementById('expItemName').value.trim();
+      var payers = document.getElementById('expPayers').value.trim();
+      var forWhom = document.getElementById('expForWhom').value.trim();
+      var cur = document.getElementById('expCurrency').value;
+      var amt = parseFloat(document.getElementById('expAmount').value);
+
+      if (!itemName) { alert('請輸入「1. 支付項目名稱」！'); return; }
+      if (!payers) { alert('請輸入「2. 支付人員名字」！'); return; }
+      if (!forWhom) { alert('請輸入「3. 幫代墊人員」！'); return; }
+      if (isNaN(amt) || amt <= 0) { alert('請輸入有效的「4. 幫代墊金額」！'); return; }
+
+      var amtVND = cur === 'VND' ? Math.round(amt) : Math.round(amt * currentLiveRate);
+      var amtNTD = cur === 'NTD' ? Math.round(amt) : Math.round(amt / currentLiveRate);
+
+      var now = new Date();
+      var timeStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' +
+                    String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+      expenseList.unshift({
+        id: Date.now(),
+        time: timeStr,
+        item: itemName,
+        payers: payers,
+        forWhom: forWhom,
+        origCur: cur,
+        amtVND: amtVND,
+        amtNTD: amtNTD
+      });
+
+      document.getElementById('expItemName').value = '';
+      document.getElementById('expAmount').value = '';
+      updateExpPreview();
+      saveExpenses();
+    }
+
+    function deleteExpenseRecord(id) {
+      if (!confirm('確定要刪除這筆支出紀錄嗎？')) return;
+      expenseList = expenseList.filter(function(r) { return r.id !== id; });
+      saveExpenses();
+    }
+
+    function clearAllExpenses() {
+      if (!expenseList.length) return;
+      if (!confirm('確定要清空所有記帳紀錄嗎？此動作無法復原。')) return;
+      expenseList = [];
+      saveExpenses();
+    }
+
+    function renderExpenses() {
+      var listEl = document.getElementById('expenseListContainer');
+      var countEl = document.getElementById('expCount');
+      var totalNTDEl = document.getElementById('expTotalNTD');
+      var totalVNDEl = document.getElementById('expTotalVND');
+      var payerBox = document.getElementById('payerSummaryBox');
+      var payerListEl = document.getElementById('payerSummaryList');
+
+      countEl.innerText = expenseList.length;
+
+      var sumNTD = 0;
+      var sumVND = 0;
+      var payerStats = {};
+
+      expenseList.forEach(function(r) {
+        sumNTD += r.amtNTD;
+        sumVND += r.amtVND;
+
+        var pNames = r.payers.split(/[,，、\s]+/).filter(Boolean);
+        var splitNTD = pNames.length > 0 ? Math.round(r.amtNTD / pNames.length) : r.amtNTD;
+        pNames.forEach(function(p) {
+          if (!payerStats[p]) payerStats[p] = 0;
+          payerStats[p] += splitNTD;
+        });
+      });
+
+      totalNTDEl.innerText = sumNTD.toLocaleString();
+      totalVNDEl.innerText = sumVND.toLocaleString();
+
+      // 渲染各支付人先付累計
+      var pKeys = Object.keys(payerStats);
+      if (pKeys.length > 0) {
+        payerBox.style.display = 'block';
+        var pHtml = '';
+        pKeys.forEach(function(k) {
+          pHtml += '<div class="summary-row"><span>👤 <strong>' + k + '</strong> 先付/代墊累計</span><span>約 NT$ ' + payerStats[k].toLocaleString() + '</span></div>';
+        });
+        payerListEl.innerHTML = pHtml;
+      } else {
+        payerBox.style.display = 'none';
+      }
+
+      if (expenseList.length === 0) {
+        listEl.innerHTML = '<div style="text-align:center; padding:28px 16px; background:#fff; border-radius:16px; color:#64748b; font-size:0.86rem; border:1px dashed #cbd5e1;">目前尚無支出紀錄，請從上方表單新增第一筆記帳！</div>';
+        return;
+      }
+
+      var html = '';
+      expenseList.forEach(function(r) {
+        html += '<div class="exp-record-card">' +
+          '<div style="flex:1;">' +
+            '<div style="font-size:0.72rem; color:#64748b; font-weight:700;">🕒 ' + r.time + '</div>' +
+            '<div style="font-size:0.98rem; font-weight:800; color:#1e293b; margin:2px 0 4px;">' + r.item + '</div>' +
+            '<div>' +
+              '<span class="exp-tag-pill">💳 支付人：<strong>' + r.payers + '</strong></span>' +
+              '<span class="exp-tag-pill" style="background:#fff7ed; color:#9a3412;">🤝 幫代墊：<strong>' + r.forWhom + '</strong></span>' +
+            '</div>' +
+          '</div>' +
+          '<div style="text-align:right; flex-shrink:0;">' +
+            '<div style="font-size:1.05rem; font-weight:800; color:#15803d;">NT$ ' + r.amtNTD.toLocaleString() + '</div>' +
+            '<div style="font-size:0.75rem; color:#64748b; font-weight:600; margin-bottom:6px;">' + r.amtVND.toLocaleString() + ' ₫</div>' +
+            '<button type="button" class="exp-del-btn" onclick="deleteExpenseRecord(' + r.id + ')">刪除</button>' +
+          '</div>' +
+        '</div>';
+      });
+      listEl.innerHTML = html;
+    }
+
+    function exportExpensesToClipboard() {
+      if (!expenseList.length) {
+        alert('目前還沒有任何記帳紀錄可以複製喔！');
+        return;
+      }
+      var lines = ['🌴【胡志明市家族旅遊 ‧ 實際支出對帳單】'];
+      var totalN = 0;
+      var totalV = 0;
+      expenseList.forEach(function(r, idx) {
+        totalN += r.amtNTD;
+        totalV += r.amtVND;
+        lines.push((idx + 1) + '. [' + r.time + '] ' + r.item);
+        lines.push('   • 支付人：' + r.payers + ' ｜ 幫代墊：' + r.forWhom);
+        lines.push('   • 金額：NT$ ' + r.amtNTD.toLocaleString() + ' (' + r.amtVND.toLocaleString() + ' ₫)');
+      });
+      lines.push('-------------------------');
+      lines.push('💰 累計總支出：NT$ ' + totalN.toLocaleString() + ' (' + totalV.toLocaleString() + ' ₫)');
+
+      var text = lines.join('\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          alert('✅ 對帳報表已複製！可直接貼上至 LINE 群組。');
+        });
+      } else {
+        prompt('請全選並複製以下對帳報表：', text);
+      }
+    }
+
     // 啟動初始化
     window.onload = function() {
       buildItineraryDOM();
+      loadExpenses();
       updateClocks();
       switchDay('day1');
       fetchLiveExchangeRate(false);
@@ -1215,3 +1553,5 @@
   </script>
 </body>
 </html>
+
+```
