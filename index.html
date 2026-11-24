@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" content="notranslate">
-  <title>胡志明市 5天4夜 孝親自由行手冊 (星宇最終旗艦版)</title>
+  <title>胡志明市 5天4夜 孝親自由行手冊 (7人星宇最終旗艦版)</title>
   <style>
     :root {
       --primary: #134e4a; --primary-light: #f0fdfa; --primary-dark: #042f2e;
@@ -204,7 +204,7 @@
       <div class="modal-header">
         <div>
           <div class="modal-title" style="color:var(--grab-green);">🚗 Grab 叫車安裝與使用手把手教學</div>
-          <div style="font-size:0.75rem; color:#64748b;">越南自由行必備 ‧ 8人全期叫車攻略</div>
+          <div style="font-size:0.75rem; color:#64748b;">越南自由行必備 ‧ 7人全期叫車攻略</div>
         </div>
         <button class="modal-close-btn" onclick="toggleGrabModal(false)">✕</button>
       </div>
@@ -215,7 +215,7 @@
       </div>
       <div class="grab-step-card"><strong>1. 在台灣先完成手機號碼註冊</strong>使用台灣門號接收 SMS 簡訊驗證碼即可完成設定。到越南換網卡後帳號依然正常運作。</div>
       <div class="grab-step-card"><strong>2. 建議在台灣先綁定信用卡 (GrabPay)</strong>在「帳戶 ➔ 支付方式」綁定信用卡。下車直接扣款，完全不必掏現金找零，避免司機找錯錢！</div>
-      <div class="grab-step-card"><strong>3. 如何搜尋目的地與選車型 (8人分叫兩台大車)</strong>點擊首頁「Car」➔ 輸入景點英文名稱 ➔ 選擇 <b>「GrabCar 7-Seater (7人座大車)」</b>，8 位大人請分叫 2 台，螢幕顯示固定車資絕不加價！</div>
+      <div class="grab-step-card"><strong>3. 如何搜尋目的地與選車型 (7人分叫兩台大車)</strong>點擊首頁「Car」➔ 輸入景點英文名稱 ➔ 選擇 <b>「GrabCar 7-Seater (7人座大車)」</b>，7 位大人請分叫 2 台（4人＋3人），行李寬敞、螢幕顯示固定車資絕不加價！</div>
       <div class="grab-step-card"><strong>4. 上車前務必核對車牌與車型</strong>核對車牌號碼與 App 顯示完全一致才上車，絕不搭路邊主動搭訕的偽裝司機！</div>
       <div class="grab-step-card" style="margin-bottom:0;"><strong>5. 內建自動雙向翻譯聊天室</strong>司機傳越語訊息會自動翻譯成中文，不會越語也暢行無阻！</div>
     </div>
@@ -350,7 +350,7 @@
     <!-- 動態生成 Day 1 ~ Day 5 的容器 -->
     <div id="itineraryRoot"></div>
 
-<!-- BUDGET PANEL (7人版) -->
+    <!-- BUDGET PANEL (7人版) -->
     <div id="budget" class="day-panel">
       <div class="day-header">
         <h2>💰 全團 7 人預算總彙整 (星宇最終旗艦版)</h2>
@@ -378,11 +378,11 @@
       </div>
     </div>
 
-    <!-- EXPENSE PANEL (實際支出與代墊記帳本 + 專屬人名 + 收據拍照上傳) -->
+    <!-- EXPENSE PANEL (7人實際支出與結算追蹤記帳本) -->
     <div id="expense" class="day-panel">
       <div class="day-header">
         <h2>📝 實際支出與代墊記帳本 (含收據拍照存檔)</h2>
-        <div class="day-meta">專屬成員一鍵點選 ｜ 支援拍攝/上傳收據明細 ｜ 越盾/台幣自動換算</div>
+        <div class="day-meta">7人專屬成員一鍵點選 ｜ 點擊姓名標記已付 ｜ 自動計算待結清轉帳</div>
       </div>
 
       <div class="expense-form-card">
@@ -477,8 +477,7 @@
         </div>
       </div>
 
-      <!-- 支付人員代墊總額統計表 -->
-<!-- 結算追蹤看板 (自動扣除已勾選已付項目) -->
+      <!-- 結算追蹤看板 (自動扣除已勾選已付項目) -->
       <div class="settle-board" id="settlementBoard" style="display:none;">
         <h3>
           <span>🧾 結算追蹤看板 (待結清轉帳)</span>
@@ -498,7 +497,7 @@
 
   <script>
     // ==========================================
-    // 1. 行程資料庫 (Data-Driven 架構)
+    // 1. 7人行程資料庫 (Data-Driven 架構)
     // ==========================================
     var itineraryData = [
       {
@@ -511,15 +510,15 @@
             title: '✈️ 提前 2 小時抵達桃園機場 T2 ‧ 星宇 JX711 報到托運',
             hours: '班機資訊：JX711 07:40 起飛 ➔ 10:30 抵達胡志明 (SGN)',
             spot: { icon: '🛫', name: '星宇航空櫃檯 (桃園機場第二航廈 3F)', sub: '請於 05:40 集合 ‧ 托運行李 (23kg/人) ‧ 輕裝通關' },
-            desc: '請全團長輩提早於 05:40 抵達第二航廈星宇櫃檯集合，辦理登機證、行李托運（每人 23kg）與通關。機上提供精緻熱食與個人影音設備。'
+            desc: '請全團 7 位家人提早於 05:40 抵達第二航廈星宇櫃檯集合，辦理登機證、行李托運（每人 23kg）與通關。機上提供精緻熱食與個人影音設備。'
           },
           {
             time: '10:30 - 11:30',
             title: '抵達新山一機場 ‧ 叫 2 台 GrabCar 7-Seater',
             hours: '營業：24小時全年無休',
-            spot: { icon: '🚗', name: '新山一國際機場 (SGN) 國際航廈出境乘車區', sub: '開啟 App 叫 2 台 7 人座大車 ‧ 行李乘客寬敞入座' },
+            spot: { icon: '🚗', name: '新山一國際機場 (SGN) 國際航廈出境乘車區', sub: '7人分乘 2 台 7 人座大車 (4人+3人) ‧ 行李寬敞入座' },
             tags: [{ cls: 'tag-senior', text: '長者友善' }],
-            desc: '星宇 JX711 落地。提領行李後，直接使用 Grab App 叫 2 台 GrabCar 7-Seater 直奔第一區飯店。',
+            desc: '星宇 JX711 落地。提領行李後，直接使用 Grab App 叫 2 台 GrabCar 7-Seater（分乘 4 人與 3 人）直奔第一區飯店。',
             links: [
               { cls: 'btn-map', text: '📍 機場導航', q: 'Tan+Son+Nhat+International+Airport' },
               { cls: 'btn-real-photo', text: '📸 查看機場實景', q: 'Tan+Son+Nhat+International+Airport' }
@@ -528,7 +527,7 @@
           },
           {
             time: '12:05 - 12:30',
-            title: '飯店寄放 8 件大行李 ‧ 長輩稍微梳洗整理',
+            title: '飯店寄放 7 件大行李 ‧ 長輩稍微梳洗整理',
             hours: '櫃檯服務：24小時全年無休 (行李免費安全保管)',
             spot: { icon: '🏨', name: 'Adora Art Hotel / Cochin Sang Hotel', sub: '第一區市中心 ‧ 檳城市場旁優質精品飯店' },
             tags: [{ cls: 'tag-senior', text: '免費寄放行李' }],
@@ -599,10 +598,10 @@
         summary: [
           ['機場 ➔ 飯店 Grab 車資 (2台7人座)', '約 NT$ 400'],
           ['市區 Grab 車資 (2台車合計)', '約 NT$ 320'],
-          ['統一宮門票 (8人)', 'NT$ 600'],
-          ['錦麗河粉午餐', 'NT$ 1,800'],
-          ['Bếp Mẹ Ỉn 迎賓晚餐', 'NT$ 3,200'],
-          ['當日費用合計 (不含超市)', '約 NT$ 6,320']
+          ['統一宮門票 (7人)', 'NT$ 525'],
+          ['錦麗河粉午餐 (7人)', 'NT$ 1,575'],
+          ['Bếp Mẹ Ỉn 迎賓晚餐 (7人)', 'NT$ 2,800'],
+          ['當日費用合計 (不含超市)', '約 NT$ 5,620']
         ]
       },
       {
@@ -714,12 +713,12 @@
         ],
         summary: [
           ['Huỳnh Hoa 最強法包早餐 (4大份對切8份)', 'NT$ 700'],
-          ['咖啡公寓門票與蛋咖啡', 'NT$ 1,400'],
+          ['咖啡公寓門票與蛋咖啡 (7人)', 'NT$ 1,225'],
           ['市區 Grab 車資 (含回飯店多一趟，2台車合計)', '約 NT$ 600'],
-          ['陳達粿條午餐', 'NT$ 1,400'],
-          ['草本足浴＋越式洗頭全套 (8人)', 'NT$ 6,000'],
-          ['西貢河豪華遊船晚餐 (8人)', 'NT$ 7,200'],
-          ['當日費用合計 (不含伴手禮)', '約 NT$ 17,300']
+          ['陳達粿條午餐 (7人)', 'NT$ 1,225'],
+          ['草本足浴＋越式洗頭全套 (7人)', 'NT$ 5,250'],
+          ['西貢河豪華遊船晚餐 (7人)', 'NT$ 6,300'],
+          ['當日費用合計 (不含伴手禮)', '約 NT$ 15,300']
         ]
       },
       {
@@ -733,11 +732,11 @@
             hours: '營業：06:00 - 22:00',
             tags: [{ cls: 'tag-food', text: '在地早餐' }],
             desc: '08:00 出發前，帶長輩在飯店巷口品嚐熱騰騰的現煮生牛肉湯河粉，補充一日遊體力。',
-            transit: { label: '🚐【Klook 8人專屬中巴接送】：08:00 飯店大廳出發直達美托', time: '車程約 1.5 ~ 2 小時 (高速公路約 72 公里，團費已包含)' }
+            transit: { label: '🚐【Klook 7人專屬中巴接送】：08:00 飯店大廳出發直達美托', time: '車程約 1.5 ~ 2 小時 (高速公路約 72 公里，團費已包含)' }
           },
           {
             time: '08:00 - 17:00',
-            title: 'Klook 湄公河美托水鄉一日遊 (8人中文私人團)',
+            title: 'Klook 湄公河美托水鄉一日遊 (7人中文私人團)',
             hours: '景點營運：08:00 - 17:00 (永長寺07:30 - 17:30)',
             spot: { icon: '🛶', name: '湄公河三角洲美托水鄉 ＋ 百年永長古寺', sub: '綠蔭水椰林木造手搖舢舨船 ‧ 現炸油亮象耳魚午宴 ‧ 椰子糖工坊' },
             must: { title: '🥥 水鄉特色必吃必買：', html: '• <strong>現炸油亮象耳魚 (Cá Tai Tượng)</strong>：魚肉香酥，搭配米紙蔬菜現捲現吃。<br>• <strong>中空香脆糯米恐龍蛋</strong>：外酥內 Q 甜鹹適中。<br>• <strong>手作現包椰子糖 (Kẹo dừa)</strong>：剛出爐熱呼呼試吃最香，買原味與可可口味！' },
@@ -774,12 +773,12 @@
           }
         ],
         summary: [
-          ['越式河粉早餐', 'NT$ 600'],
-          ['Klook 8人專屬中文導遊包團 (含車、船、午餐門票)', 'NT$ 8,800'],
+          ['越式河粉早餐 (7人)', 'NT$ 525'],
+          ['Klook 7人專屬中文導遊包團 (已購 $900/人)', 'NT$ 6,300'],
           ['市區 Grab 車資 (2台車合計)', '約 NT$ 280'],
-          ['Landmark 81 觀景台門票 (8人)', 'NT$ 4,800'],
-          ['81商場特色晚餐', 'NT$ 4,000'],
-          ['當日費用合計', '約 NT$ 18,480']
+          ['Landmark 81 觀景台門票 (7人)', 'NT$ 4,200'],
+          ['81商場特色晚餐 (7人)', 'NT$ 3,500'],
+          ['當日費用合計', '約 NT$ 14,805']
         ]
       },
       {
@@ -857,12 +856,12 @@
           }
         ],
         summary: [
-          ['碎米飯早餐', 'NT$ 600'],
+          ['碎米飯早餐 (7人)', 'NT$ 525'],
           ['市區 Grab 車資 (2台車合計)', '約 NT$ 640'],
-          ['特色牛肉鍋午餐', 'NT$ 2,400'],
-          ['草本足浴＋越式洗頭全套 (8人)', 'NT$ 6,000'],
-          ['檳城夜市豐盛海鮮與小吃晚餐', 'NT$ 3,600'],
-          ['當日費用合計 (不含超市)', '約 NT$ 13,240']
+          ['特色牛肉鍋午餐 (7人)', 'NT$ 2,100'],
+          ['草本足浴＋越式洗頭全套 (7人)', 'NT$ 5,250'],
+          ['檳城夜市豐盛海鮮與小吃晚餐 (7人)', 'NT$ 3,150'],
+          ['當日費用合計 (不含超市)', '約 NT$ 11,665']
         ]
       },
       {
@@ -875,7 +874,7 @@
             title: '08:00 出發：飯店退房寄行李 ＋ 外出享用早餐',
             hours: '營業：06:00 - 22:00',
             tags: [{ cls: 'tag-senior', text: '長輩退房' }],
-            desc: '辦理退房，8 件大行李全數寄放於飯店櫃檯。隨後步行至鄰近越式河粉店享用熱騰騰的現煮早餐。',
+            desc: '辦理退房，7 件大行李全數寄放於飯店櫃檯。隨後步行至鄰近越式河粉店享用熱騰騰的現煮早餐。',
             transit: { label: '🚗【叫 2 台 Grab】：飯店 ➔ 第五區堤岸天后宮', time: '車程約 18~22 分鐘 (約 5.5 公里，車費共約 NT$ 180)' }
           },
           {
@@ -929,11 +928,11 @@
           }
         ],
         summary: [
-          ['現煮早餐', 'NT$ 600'],
+          ['現煮早餐 (7人)', 'NT$ 525'],
           ['市區 Grab 車資 (2台車合計)', '約 NT$ 340'],
-          ['Pizza 4P\'s 歡送午宴', 'NT$ 4,800'],
+          ['Pizza 4P\'s 歡送午宴 (7人)', 'NT$ 4,200'],
           ['飯店 ➔ 機場 Grab 車資 (2台7人座)', '約 NT$ 400'],
-          ['當日費用合計', '約 NT$ 6,140']
+          ['當日費用合計', '約 NT$ 5,465']
         ]
       }
     ];
@@ -979,7 +978,7 @@
           }
         });
         html += '</div>';
-        html += '<div class="summary-card"><h3>💰 ' + day.id.toUpperCase() + ' 預估費用 (全團8人)</h3>';
+        html += '<div class="summary-card"><h3>💰 ' + day.id.toUpperCase() + ' 預估費用 (全團7人)</h3>';
         day.summary.forEach(function(row) {
           html += '<div class="summary-row"><span>' + row[0] + '</span><span>' + row[1] + '</span></div>';
         });
@@ -1361,7 +1360,6 @@
     function clearCalc() { document.getElementById('inputVND').value = ''; document.getElementById('inputNTD').value = ''; }
 
     // ==========================================
-// ==========================================
     // 6. 7人實際支出記帳系統 + 個人已付勾選 + 自動結算追蹤
     // ==========================================
     var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_7pax_v1';
@@ -1480,7 +1478,6 @@
       var amtVND = cur === 'VND' ? Math.round(amt) : Math.round(amt * currentLiveRate);
       var amtNTD = cur === 'NTD' ? Math.round(amt) : Math.round(amt / currentLiveRate);
 
-      // 若支付人自己也在分攤名單內，預設自動標記為「已付」
       var pNames = payers.split(/[,，、\s]+/).filter(Boolean);
       var fNames = forWhom.split(/[,，、\s]+/).filter(Boolean);
       var autoSettled = fNames.filter(function(n) { return pNames.indexOf(n) !== -1; });
@@ -1509,7 +1506,6 @@
       saveExpenses();
     }
 
-    // 切換單筆項目中某人的「已付 / 未付」狀態
     function togglePersonSettled(recordId, personName) {
       var rec = expenseList.find(function(r) { return r.id === recordId; });
       if (!rec) return;
@@ -1536,9 +1532,8 @@
       saveExpenses();
     }
 
-    // 計算「尚未結清」的雙向抵銷轉帳明細
     function calculateUnsettledDebts() {
-      var pairMatrix = {}; // key: "debtor->payer", value: NTD
+      var pairMatrix = {};
       expenseList.forEach(function(r) {
         var pNames = r.payers.split(/[,，、\s]+/).filter(Boolean);
         var fNames = r.forWhom.split(/[,，、\s]+/).filter(Boolean);
@@ -1549,7 +1544,7 @@
         var sharePerPayer = sharePerPerson / pNames.length;
 
         fNames.forEach(function(debtor) {
-          if (settled.indexOf(debtor) !== -1) return; // 已付清則跳過
+          if (settled.indexOf(debtor) !== -1) return;
           pNames.forEach(function(payer) {
             if (debtor === payer) return;
             var key = debtor + '➔' + payer;
@@ -1558,7 +1553,6 @@
         });
       });
 
-      // 雙向互抵 (例如 A欠B 500、B欠A 200 => 抵銷為 A給B 300)
       var finalDebts = [];
       var visited = {};
       Object.keys(pairMatrix).forEach(function(key) {
@@ -1619,7 +1613,6 @@
       totalNTDEl.innerText = sumNTD.toLocaleString();
       totalVNDEl.innerText = sumVND.toLocaleString();
 
-      // 渲染結算追蹤看板
       if (expenseList.length > 0) {
         settleBoard.style.display = 'block';
         progressEl.innerText = '結清進度：' + settledShares + ' / ' + totalShares + ' 人次';
@@ -1738,6 +1731,7 @@
         prompt('請全選並複製以下對帳報表：', text);
       }
     }
+
     // 啟動初始化
     window.onload = function() {
       buildItineraryDOM();
