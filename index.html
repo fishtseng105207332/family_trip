@@ -1113,6 +1113,7 @@
       if (p) p.style.display = 'block';
       var b = document.getElementById('btn-' + targetId);
       if (b) { b.classList.add('active'); b.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }); }
+      if (targetId === 'expense') syncFromCloud(false);
     }
     function prevDay() { var i = dayList.indexOf(currentDay); if (i > 0) switchDay(dayList[i - 1]); }
     function nextDay() { var i = dayList.indexOf(currentDay); if (i < dayList.length - 1) switchDay(dayList[i + 1]); }
@@ -1359,12 +1360,22 @@
     function quickAddVND(a) { document.getElementById('inputVND').value = a; calcVNDtoNTD(); }
     function clearCalc() { document.getElementById('inputVND').value = ''; document.getElementById('inputNTD').value = ''; }
 
+// ==========================================
+    // 6. 7人實際支出記帳系統 (Google 試算表雲端同步版)
     // ==========================================
-    // 6. 7人實際支出記帳系統 + 個人已付勾選 + 自動結算追蹤
-    // ==========================================
+    var CLOUD_API_URL = 'https://script.google.com/macros/s/AKfycbwWlJSqQaZB9FOEVJfJ-kCJuRTp1ij9elcO0F_4R48aRN3HxxgAsQrg-6AZbuOWvgD-/exec';
     var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_7pax_v1';
     var expenseList = [];
     var pendingPhotoDataUrl = null;
+
+    function setCloudStatus(text) {
+      var el = document.getElementById('cloudSyncBadge');
+      if (el) el.innerText = text;
+    }
+
+    function isCloudConfigured() {
+      return CLOUD_API_URL && CLOUD_API_URL.indexOf('https://script.google.com/') === 0;
+    }
 
     function loadExpenses() {
       try {
@@ -1374,15 +1385,58 @@
         expenseList = [];
       }
       renderExpenses();
+      syncFromCloud(false);
     }
 
-    function saveExpenses() {
+    function saveLocalCache() {
       try {
         localStorage.setItem(STORAGE_KEY_EXP, JSON.stringify(expenseList));
-      } catch (e) {
-        alert('手機瀏覽器儲存空間已滿！請先刪除幾筆舊照片紀錄，或複製報表備份後清空。');
-      }
+      } catch (e) {}
       renderExpenses();
+    }
+
+    function syncFromCloud(showMsg) {
+      if (!isCloudConfigured()) {
+        setCloudStatus('📱 僅本機模式');
+        return;
+      }
+      setCloudStatus('🔄 同步中...');
+      fetch(CLOUD_API_URL + '?t=' + Date.now())
+        .then(function(res) { return res.json(); })
+        .then(function(json) {
+          if (json && json.status === 'ok' && Array.isArray(json.data)) {
+            expenseList = json.data;
+            saveLocalCache();
+            setCloudStatus('☁️ 已同步');
+            if (showMsg) alert('✅ 已從雲端同步最新帳目！');
+          } else {
+            setCloudStatus('⚠️ 同步異常');
+          }
+        })
+        .catch(function() {
+          setCloudStatus('📡 離線快取');
+        });
+    }
+
+    function postToCloud(payload) {
+      if (!isCloudConfigured()) return;
+      setCloudStatus('☁️ 上傳中...');
+      fetch(CLOUD_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      })
+        .then(function(res) { return res.json(); })
+        .then(function(json) {
+          if (json && json.status === 'ok') {
+            setCloudStatus('☁️ 已同步');
+          } else {
+            setCloudStatus('⚠️ 上傳失敗');
+          }
+        })
+        .catch(function() {
+          setCloudStatus('⚠️ 網路異常');
+        });
     }
 
     function setExpItem(name) {
@@ -1423,6 +1477,7 @@
       }
     }
 
+    // 壓縮收據圖檔，確保小於 Google 試算表單格 50,000 字元上限
     function handleReceiptPhoto(event) {
       var file = event.target.files && event.target.files[0];
       if (!file) return;
@@ -1430,16 +1485,22 @@
       reader.onload = function(e) {
         var img = new Image();
         img.onload = function() {
-          var maxDim = 800;
-          var w = img.width, h = img.height;
-          if (w > maxDim || h > maxDim) {
-            if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
-            else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+          function compress(maxDim, quality) {
+            var w = img.width, h = img.height;
+            if (w > maxDim || h > maxDim) {
+              if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+              else { w = Math.round(w * (maxDim / h)); h = maxDim; }
+            }
+            var canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+            return canvas.toDataURL('image/jpeg', quality);
           }
-          var canvas = document.createElement('canvas');
-          canvas.width = w; canvas.height = h;
-          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-          pendingPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.65);
+          var dataUrl = compress(600, 0.55);
+          if (dataUrl.length > 45000) dataUrl = compress(450, 0.45);
+          if (dataUrl.length > 45000) dataUrl = compress(360, 0.35);
+
+          pendingPhotoDataUrl = dataUrl;
           document.getElementById('expPhotoPreviewImg').src = pendingPhotoDataUrl;
           document.getElementById('expPhotoPreviewWrap').style.display = 'flex';
         };
@@ -1486,7 +1547,7 @@
       var timeStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' +
                     String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
 
-      expenseList.unshift({
+      var newRecord = {
         id: Date.now(),
         time: timeStr,
         item: itemName,
@@ -1497,13 +1558,15 @@
         amtNTD: amtNTD,
         photo: pendingPhotoDataUrl || null,
         settledList: autoSettled
-      });
+      };
 
+      expenseList.unshift(newRecord);
       document.getElementById('expItemName').value = '';
       document.getElementById('expAmount').value = '';
       clearPendingPhoto();
       updateExpPreview();
-      saveExpenses();
+      saveLocalCache();
+      postToCloud({ action: 'add', record: newRecord });
     }
 
     function togglePersonSettled(recordId, personName) {
@@ -1516,20 +1579,23 @@
       } else {
         rec.settledList.splice(idx, 1);
       }
-      saveExpenses();
+      saveLocalCache();
+      postToCloud({ action: 'toggle', id: recordId, settledList: rec.settledList });
     }
 
     function deleteExpenseRecord(id) {
       if (!confirm('確定要刪除這筆支出紀錄嗎？')) return;
       expenseList = expenseList.filter(function(r) { return r.id !== id; });
-      saveExpenses();
+      saveLocalCache();
+      postToCloud({ action: 'delete', id: id });
     }
 
     function clearAllExpenses() {
       if (!expenseList.length) return;
-      if (!confirm('確定要清空所有記帳紀錄嗎？此動作無法復原。')) return;
+      if (!confirm('確定要清空所有雲端與本機記帳紀錄嗎？此動作無法復原。')) return;
       expenseList = [];
-      saveExpenses();
+      saveLocalCache();
+      postToCloud({ action: 'clear' });
     }
 
     function calculateUnsettledDebts() {
@@ -1731,7 +1797,6 @@
         prompt('請全選並複製以下對帳報表：', text);
       }
     }
-
     // 啟動初始化
     window.onload = function() {
       buildItineraryDOM();
