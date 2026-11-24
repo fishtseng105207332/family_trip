@@ -101,6 +101,16 @@
     .receipt-thumb-btn { margin-top: 6px; display: inline-flex; align-items: center; gap: 6px; background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; padding: 4px 8px; border-radius: 6px; font-size: 0.74rem; font-weight: 700; cursor: pointer; }
     .receipt-thumb-img { width: 32px; height: 32px; object-fit: cover; border-radius: 4px; }
 
+    /* 結算狀態按鈕與追蹤看板樣式 */
+    .settle-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #e2e8f0; }
+    .settle-chip { border: 1.5px solid #cbd5e1; background: #fff7ed; color: #9a3412; padding: 3px 9px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; transition: all 0.15s; }
+    .settle-chip.paid { background: #dcfce7; border-color: #86efac; color: #166534; text-decoration: line-through; opacity: 0.85; }
+    .settle-badge-done { display: inline-block; background: #16a34a; color: #fff; font-size: 0.68rem; font-weight: 800; padding: 1px 6px; border-radius: 4px; margin-left: 6px; }
+    .settle-board { background: #fff; border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow); border: 1.5px solid #99f6e4; margin-bottom: 14px; }
+    .settle-board h3 { font-size: 0.92rem; color: var(--primary-dark); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .debt-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 10px; background: #fffbeb; border-left: 3px solid #f59e0b; border-radius: 6px; margin-bottom: 6px; font-size: 0.84rem; color: #78350f; }
+    .debt-item strong { color: #b45309; }
+
     /* 懸浮按鈕與彈窗 */
     .fab-container { position: fixed; bottom: 20px; right: 16px; display: flex; flex-direction: column; gap: 10px; z-index: 10000; }
     .fab-btn { color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; font-size: 0.65rem; font-weight: 800; box-shadow: 0 4px 12px rgba(0,0,0,0.22); }
@@ -468,9 +478,17 @@
       </div>
 
       <!-- 支付人員代墊總額統計表 -->
-      <div class="summary-card" id="payerSummaryBox" style="margin-bottom:14px; display:none;">
-        <h3>💳 各支付人員累計先付/代墊總計</h3>
-        <div id="payerSummaryList"></div>
+<!-- 結算追蹤看板 (自動扣除已勾選已付項目) -->
+      <div class="settle-board" id="settlementBoard" style="display:none;">
+        <h3>
+          <span>🧾 結算追蹤看板 (待結清轉帳)</span>
+          <span id="settleProgressText" style="font-size:0.75rem; color:#0f766e; font-weight:700;"></span>
+        </h3>
+        <div id="debtTrackingList"></div>
+        <div style="margin-top:10px; padding-top:8px; border-top:1px dashed #cbd5e1;">
+          <div style="font-size:0.78rem; font-weight:800; color:#475569; margin-bottom:4px;">💳 各成員累計先付總額：</div>
+          <div id="payerSummaryList"></div>
+        </div>
       </div>
 
       <!-- 歷史明細列表 -->
@@ -1343,9 +1361,10 @@
     function clearCalc() { document.getElementById('inputVND').value = ''; document.getElementById('inputNTD').value = ''; }
 
     // ==========================================
-    // 6. 實際支出記帳系統 + 智慧收據照片壓縮
+// ==========================================
+    // 6. 7人實際支出記帳系統 + 個人已付勾選 + 自動結算追蹤
     // ==========================================
-    var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_v2';
+    var STORAGE_KEY_EXP = 'hcm_family_trip_expenses_7pax_v1';
     var expenseList = [];
     var pendingPhotoDataUrl = null;
 
@@ -1406,29 +1425,23 @@
       }
     }
 
-    // Canvas 智慧縮圖壓縮 (限制最大邊 800px，JPEG 品質 0.65，確保單張僅 ~40KB 不爆 LocalStorage)
     function handleReceiptPhoto(event) {
       var file = event.target.files && event.target.files[0];
       if (!file) return;
-
       var reader = new FileReader();
       reader.onload = function(e) {
         var img = new Image();
         img.onload = function() {
           var maxDim = 800;
-          var w = img.width;
-          var h = img.height;
+          var w = img.width, h = img.height;
           if (w > maxDim || h > maxDim) {
             if (w > h) { h = Math.round(h * (maxDim / w)); w = maxDim; }
             else { w = Math.round(w * (maxDim / h)); h = maxDim; }
           }
           var canvas = document.createElement('canvas');
-          canvas.width = w;
-          canvas.height = h;
-          var ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
+          canvas.width = w; canvas.height = h;
+          canvas.getContext('2d').drawImage(img, 0, 0, w, h);
           pendingPhotoDataUrl = canvas.toDataURL('image/jpeg', 0.65);
-
           document.getElementById('expPhotoPreviewImg').src = pendingPhotoDataUrl;
           document.getElementById('expPhotoPreviewWrap').style.display = 'flex';
         };
@@ -1467,6 +1480,11 @@
       var amtVND = cur === 'VND' ? Math.round(amt) : Math.round(amt * currentLiveRate);
       var amtNTD = cur === 'NTD' ? Math.round(amt) : Math.round(amt / currentLiveRate);
 
+      // 若支付人自己也在分攤名單內，預設自動標記為「已付」
+      var pNames = payers.split(/[,，、\s]+/).filter(Boolean);
+      var fNames = forWhom.split(/[,，、\s]+/).filter(Boolean);
+      var autoSettled = fNames.filter(function(n) { return pNames.indexOf(n) !== -1; });
+
       var now = new Date();
       var timeStr = (now.getMonth() + 1) + '/' + now.getDate() + ' ' +
                     String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
@@ -1480,13 +1498,28 @@
         origCur: cur,
         amtVND: amtVND,
         amtNTD: amtNTD,
-        photo: pendingPhotoDataUrl || null
+        photo: pendingPhotoDataUrl || null,
+        settledList: autoSettled
       });
 
       document.getElementById('expItemName').value = '';
       document.getElementById('expAmount').value = '';
       clearPendingPhoto();
       updateExpPreview();
+      saveExpenses();
+    }
+
+    // 切換單筆項目中某人的「已付 / 未付」狀態
+    function togglePersonSettled(recordId, personName) {
+      var rec = expenseList.find(function(r) { return r.id === recordId; });
+      if (!rec) return;
+      if (!rec.settledList) rec.settledList = [];
+      var idx = rec.settledList.indexOf(personName);
+      if (idx === -1) {
+        rec.settledList.push(personName);
+      } else {
+        rec.settledList.splice(idx, 1);
+      }
       saveExpenses();
     }
 
@@ -1503,45 +1536,116 @@
       saveExpenses();
     }
 
+    // 計算「尚未結清」的雙向抵銷轉帳明細
+    function calculateUnsettledDebts() {
+      var pairMatrix = {}; // key: "debtor->payer", value: NTD
+      expenseList.forEach(function(r) {
+        var pNames = r.payers.split(/[,，、\s]+/).filter(Boolean);
+        var fNames = r.forWhom.split(/[,，、\s]+/).filter(Boolean);
+        var settled = r.settledList || [];
+        if (!pNames.length || !fNames.length) return;
+
+        var sharePerPerson = r.amtNTD / fNames.length;
+        var sharePerPayer = sharePerPerson / pNames.length;
+
+        fNames.forEach(function(debtor) {
+          if (settled.indexOf(debtor) !== -1) return; // 已付清則跳過
+          pNames.forEach(function(payer) {
+            if (debtor === payer) return;
+            var key = debtor + '➔' + payer;
+            pairMatrix[key] = (pairMatrix[key] || 0) + sharePerPayer;
+          });
+        });
+      });
+
+      // 雙向互抵 (例如 A欠B 500、B欠A 200 => 抵銷為 A給B 300)
+      var finalDebts = [];
+      var visited = {};
+      Object.keys(pairMatrix).forEach(function(key) {
+        if (visited[key]) return;
+        var parts = key.split('➔');
+        var a = parts[0], b = parts[1];
+        var revKey = b + '➔' + a;
+        var amtAB = pairMatrix[key] || 0;
+        var amtBA = pairMatrix[revKey] || 0;
+        visited[key] = true;
+        visited[revKey] = true;
+
+        var net = Math.round(amtAB - amtBA);
+        if (net > 0) {
+          finalDebts.push({ from: a, to: b, ntd: net });
+        } else if (net < 0) {
+          finalDebts.push({ from: b, to: a, ntd: Math.abs(net) });
+        }
+      });
+      return finalDebts;
+    }
+
     function renderExpenses() {
       var listEl = document.getElementById('expenseListContainer');
       var countEl = document.getElementById('expCount');
       var totalNTDEl = document.getElementById('expTotalNTD');
       var totalVNDEl = document.getElementById('expTotalVND');
-      var payerBox = document.getElementById('payerSummaryBox');
+      var settleBoard = document.getElementById('settlementBoard');
+      var debtListEl = document.getElementById('debtTrackingList');
+      var progressEl = document.getElementById('settleProgressText');
       var payerListEl = document.getElementById('payerSummaryList');
 
       countEl.innerText = expenseList.length;
 
-      var sumNTD = 0;
-      var sumVND = 0;
+      var sumNTD = 0, sumVND = 0;
       var payerStats = {};
+      var totalShares = 0, settledShares = 0;
 
       expenseList.forEach(function(r) {
         sumNTD += r.amtNTD;
         sumVND += r.amtVND;
 
         var pNames = r.payers.split(/[,，、\s]+/).filter(Boolean);
+        var fNames = r.forWhom.split(/[,，、\s]+/).filter(Boolean);
+        var settled = r.settledList || [];
+
+        totalShares += fNames.length;
+        fNames.forEach(function(n) {
+          if (settled.indexOf(n) !== -1) settledShares++;
+        });
+
         var splitNTD = pNames.length > 0 ? Math.round(r.amtNTD / pNames.length) : r.amtNTD;
         pNames.forEach(function(p) {
-          if (!payerStats[p]) payerStats[p] = 0;
-          payerStats[p] += splitNTD;
+          payerStats[p] = (payerStats[p] || 0) + splitNTD;
         });
       });
 
       totalNTDEl.innerText = sumNTD.toLocaleString();
       totalVNDEl.innerText = sumVND.toLocaleString();
 
-      var pKeys = Object.keys(payerStats);
-      if (pKeys.length > 0) {
-        payerBox.style.display = 'block';
+      // 渲染結算追蹤看板
+      if (expenseList.length > 0) {
+        settleBoard.style.display = 'block';
+        progressEl.innerText = '結清進度：' + settledShares + ' / ' + totalShares + ' 人次';
+
+        var debts = calculateUnsettledDebts();
+        if (debts.length === 0) {
+          debtListEl.innerHTML = '<div style="padding:10px; background:#f0fdf4; color:#15803d; border-radius:8px; font-size:0.84rem; font-weight:800; text-align:center;">🎉 太棒了！目前全員帳務已全數結清！</div>';
+        } else {
+          var dHtml = '';
+          debts.forEach(function(d) {
+            var approxVND = Math.round(d.ntd * currentLiveRate);
+            dHtml += '<div class="debt-item">' +
+              '<span>👉 <strong>' + d.from + '</strong> 給 <strong>' + d.to + '</strong></span>' +
+              '<span><strong>NT$ ' + d.ntd.toLocaleString() + '</strong> <small style="color:#92400e;">(約 ' + approxVND.toLocaleString() + ' ₫)</small></span>' +
+            '</div>';
+          });
+          debtListEl.innerHTML = dHtml;
+        }
+
         var pHtml = '';
-        pKeys.forEach(function(k) {
-          pHtml += '<div class="summary-row"><span>👤 <strong>' + k + '</strong> 先付/代墊累計</span><span>約 NT$ ' + payerStats[k].toLocaleString() + '</span></div>';
+        Object.keys(payerStats).forEach(function(k) {
+          pHtml += '<div class="summary-row"><span>👤 <strong>' + k + '</strong> 先付累計</span><span>約 NT$ ' + payerStats[k].toLocaleString() + '</span></div>';
         });
         payerListEl.innerHTML = pHtml;
       } else {
-        payerBox.style.display = 'none';
+        settleBoard.style.display = 'none';
       }
 
       if (expenseList.length === 0) {
@@ -1551,6 +1655,20 @@
 
       var html = '';
       expenseList.forEach(function(r) {
+        var fNames = r.forWhom.split(/[,，、\s]+/).filter(Boolean);
+        var settled = r.settledList || [];
+        var perNTD = fNames.length > 0 ? Math.round(r.amtNTD / fNames.length) : r.amtNTD;
+        var allPaid = fNames.length > 0 && fNames.every(function(n) { return settled.indexOf(n) !== -1; });
+
+        var settleChipsHtml = '<div class="settle-row"><span style="font-size:0.72rem; color:#64748b; align-self:center;">點姓名標記已付 ($' + perNTD.toLocaleString() + '/人)：</span>';
+        fNames.forEach(function(n) {
+          var isPaid = settled.indexOf(n) !== -1;
+          var safeName = n.replace(/'/g, "\\'");
+          settleChipsHtml += '<button type="button" class="settle-chip' + (isPaid ? ' paid' : '') + '" onclick="togglePersonSettled(' + r.id + ', \'' + safeName + '\')">' +
+            (isPaid ? '✅ ' : '⏳ ') + n + '</button>';
+        });
+        settleChipsHtml += '</div>';
+
         var photoBtnHtml = '';
         if (r.photo) {
           photoBtnHtml = '<div><button type="button" class="receipt-thumb-btn" onclick="viewReceiptPhoto(' + r.id + ')">' +
@@ -1558,21 +1676,21 @@
             '<span>🔍 點此放大查看收據明細</span></button></div>';
         }
 
-        html += '<div class="exp-record-card">' +
-          '<div style="flex:1;">' +
-            '<div style="font-size:0.72rem; color:#64748b; font-weight:700;">🕒 ' + r.time + '</div>' +
-            '<div style="font-size:0.98rem; font-weight:800; color:#1e293b; margin:2px 0 4px;">' + r.item + '</div>' +
-            '<div>' +
-              '<span class="exp-tag-pill">💳 支付人：<strong>' + r.payers + '</strong></span>' +
-              '<span class="exp-tag-pill" style="background:#fff7ed; color:#9a3412;">🤝 幫代墊：<strong>' + r.forWhom + '</strong></span>' +
+        html += '<div class="exp-record-card" style="flex-direction:column; border-left-color:' + (allPaid ? '#16a34a' : '#0d9488') + ';">' +
+          '<div style="display:flex; justify-content:space-between; width:100%; gap:10px;">' +
+            '<div style="flex:1;">' +
+              '<div style="font-size:0.72rem; color:#64748b; font-weight:700;">🕒 ' + r.time + (allPaid ? '<span class="settle-badge-done">已全數結清</span>' : '') + '</div>' +
+              '<div style="font-size:0.98rem; font-weight:800; color:#1e293b; margin:2px 0 4px;">' + r.item + '</div>' +
+              '<div><span class="exp-tag-pill">💳 支付人：<strong>' + r.payers + '</strong></span></div>' +
+              photoBtnHtml +
             '</div>' +
-            photoBtnHtml +
+            '<div style="text-align:right; flex-shrink:0;">' +
+              '<div style="font-size:1.05rem; font-weight:800; color:#15803d;">NT$ ' + r.amtNTD.toLocaleString() + '</div>' +
+              '<div style="font-size:0.75rem; color:#64748b; font-weight:600; margin-bottom:6px;">' + r.amtVND.toLocaleString() + ' ₫</div>' +
+              '<button type="button" class="exp-del-btn" onclick="deleteExpenseRecord(' + r.id + ')">刪除</button>' +
+            '</div>' +
           '</div>' +
-          '<div style="text-align:right; flex-shrink:0;">' +
-            '<div style="font-size:1.05rem; font-weight:800; color:#15803d;">NT$ ' + r.amtNTD.toLocaleString() + '</div>' +
-            '<div style="font-size:0.75rem; color:#64748b; font-weight:600; margin-bottom:6px;">' + r.amtVND.toLocaleString() + ' ₫</div>' +
-            '<button type="button" class="exp-del-btn" onclick="deleteExpenseRecord(' + r.id + ')">刪除</button>' +
-          '</div>' +
+          settleChipsHtml +
         '</div>';
       });
       listEl.innerHTML = html;
@@ -1583,29 +1701,43 @@
         alert('目前還沒有任何記帳紀錄可以複製喔！');
         return;
       }
-      var lines = ['🌴【胡志明市家族旅遊 ‧ 實際支出對帳單】'];
-      var totalN = 0;
-      var totalV = 0;
+      var lines = ['🌴【胡志明市 7 人家族旅遊 ‧ 實際支出與結算對帳單】'];
+      var totalN = 0, totalV = 0;
       expenseList.forEach(function(r, idx) {
         totalN += r.amtNTD;
         totalV += r.amtVND;
-        lines.push((idx + 1) + '. [' + r.time + '] ' + r.item + (r.photo ? ' (📷附收據照片)' : ''));
-        lines.push('   • 支付人：' + r.payers + ' ｜ 幫代墊：' + r.forWhom);
-        lines.push('   • 金額：NT$ ' + r.amtNTD.toLocaleString() + ' (' + r.amtVND.toLocaleString() + ' ₫)');
+        var fNames = r.forWhom.split(/[,，、\s]+/).filter(Boolean);
+        var settled = r.settledList || [];
+        var unpaid = fNames.filter(function(n) { return settled.indexOf(n) === -1; });
+        var statusStr = unpaid.length === 0 ? '✅ 全員已結清' : ('⏳ 未付：' + unpaid.join('、'));
+
+        lines.push((idx + 1) + '. [' + r.time + '] ' + r.item + (r.photo ? ' (📷附收據)' : ''));
+        lines.push('   • 支付人：' + r.payers + ' ｜ 金額：NT$ ' + r.amtNTD.toLocaleString() + ' (' + r.amtVND.toLocaleString() + ' ₫)');
+        lines.push('   • 狀態：' + statusStr);
       });
+
       lines.push('-------------------------');
       lines.push('💰 累計總支出：NT$ ' + totalN.toLocaleString() + ' (' + totalV.toLocaleString() + ' ₫)');
+
+      var debts = calculateUnsettledDebts();
+      if (debts.length === 0) {
+        lines.push('🎉 結算狀態：全員帳務已全數結清！');
+      } else {
+        lines.push('📌 尚待結清轉帳明細：');
+        debts.forEach(function(d) {
+          lines.push('   👉 ' + d.from + ' 給 ' + d.to + '：NT$ ' + d.ntd.toLocaleString());
+        });
+      }
 
       var text = lines.join('\n');
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function() {
-          alert('✅ 對帳報表已複製！可直接貼上至 LINE 群組。');
+          alert('✅ 含結算明細的對帳報表已複製！可直接貼上至 LINE 群組。');
         });
       } else {
         prompt('請全選並複製以下對帳報表：', text);
       }
     }
-
     // 啟動初始化
     window.onload = function() {
       buildItineraryDOM();
